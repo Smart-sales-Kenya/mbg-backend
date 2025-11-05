@@ -1,0 +1,9 @@
+New Event Registration
+
+Name: {{ name }}
+Email: {{ email }}
+Event: {{ event }}
+Date: {{ date }}
+Location: {{ location }}
+
+This is an automated notification.

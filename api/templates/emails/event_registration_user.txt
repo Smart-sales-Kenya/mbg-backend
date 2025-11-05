@@ -1,0 +1,10 @@
+Hi {{ name }},
+
+Thank you for registering for {{ event }}!
+
+Date: {{ date }}
+Location: {{ location }}
+
+We look forward to seeing you there!
+
+— MBG Growth Hub Team
