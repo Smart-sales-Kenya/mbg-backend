@@ -163,3 +163,89 @@ class EventRegistration(models.Model):
 
     def __str__(self):
         return f"{self.full_name} - {self.event.title}"
+
+
+
+
+class ProgramCategory(models.Model):
+    """
+    Categories of programs: Training, Enablement, Events
+    """
+    name = models.CharField(max_length=50, unique=True)
+    slug = models.SlugField(max_length=50, unique=True)  # useful for URLs
+
+    def __str__(self):
+        return self.name
+
+
+class Program(models.Model):
+    """
+    General program model that works for all program types
+    """
+    category = models.ForeignKey(ProgramCategory, on_delete=models.CASCADE, related_name="programs")
+    title = models.CharField(max_length=200)
+    duration = models.CharField(max_length=50)
+    price = models.CharField(max_length=50)
+    description = models.TextField()
+    focus = models.TextField(blank=True, null=True)
+    outcome = models.TextField(blank=True, null=True)
+    skills = models.TextField(blank=True, null=True)  # optional, only for enablement programs
+    format = models.TextField(blank=True, null=True)  # optional, only for events
+    badge = models.CharField(max_length=50, blank=True, null=True)
+    icon_name = models.CharField(max_length=50, blank=True, null=True)  # store icon name like 'BookOpen'
+
+    def __str__(self):
+        return f"{self.title} ({self.category.name})"
+
+
+class ProgramFeature(models.Model):
+    """
+    Features of a program, e.g., "Team building and management techniques"
+    """
+    program = models.ForeignKey(Program, on_delete=models.CASCADE, related_name="features")
+    description = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f"{self.program.title} - {self.description[:30]}"
+
+
+
+class ProgramRegistration(models.Model):
+    """
+    Stores registration details for any Program
+    """
+    program = models.ForeignKey(
+        'Program', on_delete=models.CASCADE, related_name='registrations'
+    )
+
+    # Personal Information
+    full_name = models.CharField(max_length=255)
+    email = models.EmailField()
+    phone_number = models.CharField(max_length=20)
+
+    # Professional Information
+    company_name = models.CharField(max_length=255, blank=True)
+    role = models.CharField(max_length=255, blank=True)
+    team_size_choices = [
+        ("1-5", "1-5 people"),
+        ("5-10", "5-10 people"),
+        ("10-20", "10-20 people"),
+        ("20+", "20+ people"),
+    ]
+    team_size = models.CharField(max_length=10, choices=team_size_choices, blank=True)
+
+    # Additional Information
+    challenges = models.TextField(
+        blank=True,
+        help_text="Describe your current sales challenges and goals"
+    )
+
+    # Payment (optional, for paid programs)
+    has_paid = models.BooleanField(default=False)
+    payment_reference = models.CharField(max_length=255, blank=True, null=True)
+
+    # Timestamps
+    registered_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.full_name} - {self.program.title}"

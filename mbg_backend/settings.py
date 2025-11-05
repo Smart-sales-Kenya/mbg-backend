@@ -48,8 +48,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_simplejwt',
+    "rest_framework.authtoken",
+    "dj_rest_auth",
+    "dj_rest_auth.registration",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
     'corsheaders',
     'api',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -61,6 +69,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    "allauth.account.middleware.AccountMiddleware",
+
 
 ]
 
@@ -202,6 +212,11 @@ JAZZMIN_SETTINGS = {
 }
 
 from datetime import timedelta
+REST_USE_JWT = True
+
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD = "email"
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -234,3 +249,31 @@ ADMIN_EMAILS = [
     os.getenv("ADMIN_EMAIL_1"),
     os.getenv("ADMIN_EMAIL_2")
 ]
+
+SITE_ID = 1
+
+# Google social auth
+SOCIALACCOUNT_PROVIDERS = {
+            'google': {
+                'SCOPE': [
+                    'profile',
+                    'email',
+                ],
+                'APP': {
+                    'client_id': os.environ.get('GOOGLE_CLIENT_ID'), # Use environment variables for sensitive data
+                    'secret': os.environ.get('GOOGLE_CLIENT_SECRET'),
+                },
+                'AUTH_PARAMS': {
+                    'access_type': 'online',
+                }
+            }
+        }
+
+
+SECURE_REFERRER_POLICY = 'no-referrer-when-downgrade'
+SECURE_CROSS_ORIGIN_OPENER_POLICY = "same-origin-allow-popups"
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',  # default
+    'allauth.account.auth_backends.AuthenticationBackend',
+)

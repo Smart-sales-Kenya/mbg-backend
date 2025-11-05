@@ -2,6 +2,20 @@ from rest_framework import serializers
 from .models import ContactMessage,TeamMember,Testimonial
 from rest_framework import serializers
 
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
+# api/serializers.py
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    username_field = 'email'  # use email for login
+
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+        # add custom claims if needed
+        token['email'] = user.email
+        return token
 
 
 class ContactMessageSerializer(serializers.ModelSerializer):
@@ -119,3 +133,43 @@ class EventRegistrationSerializer(serializers.ModelSerializer):
             validated_data['payment_status'] = 'pending'
             validated_data['payment_amount'] = event.investment_amount
         return super().create(validated_data)
+
+from rest_framework import serializers
+from .models import ProgramCategory, Program, ProgramFeature, ProgramRegistration
+
+# Category Serializer
+class ProgramCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProgramCategory
+        fields = ['id', 'name', 'slug']
+
+
+# Feature Serializer
+class ProgramFeatureSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProgramFeature
+        fields = ['id', 'description']
+
+
+# Program Serializer
+class ProgramSerializer(serializers.ModelSerializer):
+    category = ProgramCategorySerializer(read_only=True)
+    features = ProgramFeatureSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Program
+        fields = [
+            'id', 'title', 'category', 'duration', 'price', 'description',
+            'focus', 'outcome', 'skills', 'format', 'badge', 'icon_name', 'features'
+        ]
+
+
+# Program Registration Serializer
+class ProgramRegistrationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProgramRegistration
+        fields = [
+            'id', 'program', 'full_name', 'email', 'phone_number',
+            'company_name', 'role', 'team_size', 'challenges',
+            'has_paid', 'payment_reference', 'registered_at'
+        ]

@@ -1,0 +1,19 @@
+Hi {{ full_name }},
+
+Thank you for registering for the program: "{{ program.title }}".
+
+We have received your registration and will process it shortly.
+
+{% if program.price != "Custom Pricing" %}
+Payment Details:
+- Amount: {{ program.price }}
+- Duration: {{ program.duration }}
+
+Please follow the payment instructions sent to your email or contact us if you have any questions.
+{% else %}
+Our team will reach out to you within 1-2 business days to discuss your specific requirements and provide a customized quote.
+{% endif %}
+
+Thank you,
+The MBG Sales Team
+

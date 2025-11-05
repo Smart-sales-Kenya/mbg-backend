@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Program Registration Confirmation</title>
+  <style>
+    body { font-family: Arial, sans-serif; background-color: #f8f8f8; margin: 0; padding: 0; }
+    .container { max-width: 600px; margin: 30px auto; background: #fff; padding: 20px; border-radius: 8px; }
+    h1 { color: #2b7090; }
+    p { color: #333; line-height: 1.5; }
+    .details { background: #f2f2f2; padding: 15px; border-radius: 5px; margin: 15px 0; }
+    .footer { text-align: center; font-size: 12px; color: #888; margin-top: 20px; }
+    .btn { display: inline-block; background-color: #2b7090; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 15px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Thank You for Registering!</h1>
+    <p>Hi {{ full_name }},</p>
+    <p>Thank you for registering for <strong>{{ program.title }}</strong>.</p>
+
+    <div class="details">
+      <p><strong>Program Details:</strong></p>
+      <p><strong>Title:</strong> {{ program.title }}</p>
+      <p><strong>Duration:</strong> {{ program.duration }}</p>
+      <p><strong>Price:</strong> {{ program.price }}</p>
+      {% if program.focus %}
+      <p><strong>Focus:</strong> {{ program.focus }}</p>
+      {% endif %}
+      {% if program.outcome %}
+      <p><strong>Outcome:</strong> {{ program.outcome }}</p>
+      {% endif %}
+    </div>
+
+    <p>We look forward to seeing you!</p>
+    <p>Best regards,<br>MBG Team</p>
+
+    <div class="footer">
+      Mastering Business Growth - Leading Sales Capability Training and Coaching across Africa
+    </div>
+  </div>
+</body>
+</html>

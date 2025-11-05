@@ -1,0 +1,15 @@
+New Program Registration Received!
+
+Program: {{ program.title }}
+Registrant: {{ full_name }}
+Email: {{ email }}
+Phone: {{ phone_number }}
+Company: {{ company_name }}
+Role: {{ role }}
+Team Size: {{ team_size }}
+Challenges: {{ challenges }}
+
+Please follow up with the registrant as needed.
+
+Thanks,
+Your Automated Registration System
