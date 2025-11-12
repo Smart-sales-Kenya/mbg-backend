@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; }
+        .container { max-width: 600px; margin: 0 auto; background: #ffffff; }
+        .header { background: linear-gradient(135deg, #28a745, #20c997); color: white; padding: 40px 30px; text-align: center; }
+        .content { padding: 30px; background: #f9f9f9; }
+        .footer { background: #333; color: white; padding: 20px; text-align: center; font-size: 12px; }
+        .success-box { background: white; border: 2px solid #28a745; border-radius: 10px; padding: 25px; margin: 20px 0; text-align: center; }
+        .info-card { background: white; border-radius: 8px; padding: 20px; margin: 15px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .badge { background: #28a745; color: white; padding: 8px 16px; border-radius: 20px; font-size: 14px; font-weight: bold; display: inline-block; margin-bottom: 15px; }
+        .divider { border-top: 2px dashed #ddd; margin: 25px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1 style="margin: 0; font-size: 28px;">✅ Payment Confirmed!</h1>
+            <p style="margin: 10px 0 0 0; font-size: 18px; opacity: 0.9;">Your spot is officially reserved</p>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <p>Dear <strong>{{ name }}</strong>,</p>
+            
+            <p>Great news! Your payment has been successfully processed and your registration for <strong>{{ event }}</strong> is now fully confirmed.</p>
+
+            <!-- Success Box -->
+            <div class="success-box">
+                <div class="badge">PAYMENT SUCCESSFUL</div>
+                <h2 style="color: #28a745; margin: 10px 0;">🎉 You're All Set!</h2>
+                <p style="font-size: 16px; color: #666;">We're excited to have you join us for this amazing event.</p>
+            </div>
+
+            <!-- Payment Details -->
+            <div class="info-card">
+                <h3 style="color: #333; margin-top: 0;">📊 Payment Summary</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div>
+                        <strong>Amount Paid:</strong>
+                    </div>
+                    <div>
+                        {{ amount }} {{ currency }}
+                    </div>
+                    
+                    <div>
+                        <strong>Transaction ID:</strong>
+                    </div>
+                    <div>
+                        {{ transaction_id }}
+                    </div>
+                    
+                    <div>
+                        <strong>Payment Date:</strong>
+                    </div>
+                    <div>
+                        {% now "F j, Y" %}
+                    </div>
+                    
+                    <div>
+                        <strong>Status:</strong>
+                    </div>
+                    <div style="color: #28a745; font-weight: bold;">
+                        ✅ Completed
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event Details -->
+            <div class="info-card">
+                <h3 style="color: #333; margin-top: 0;">📅 Event Information</h3>
+                <p><strong>Event:</strong> {{ event }}</p>
+                <p><strong>Date:</strong> {{ date|date:"F j, Y" }}</p>
+                <p><strong>Location:</strong> {{ location }}</p>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Next Steps -->
+            <h3>📋 What Happens Next?</h3>
+            <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                <ol style="margin: 0; padding-left: 20px;">
+                    <li><strong>Save the date</strong> - Add this event to your calendar</li>
+                    <li><strong>Watch your inbox</strong> - You'll receive event updates and reminders</li>
+                    <li><strong>Prepare</strong> - Check if you need to bring anything specific</li>
+                    <li><strong>Join early</strong> - Arrive 15 minutes before the event starts</li>
+                </ol>
+            </div>
+
+            <!-- Important Notes -->
+            <div style="background: #fff3cd; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #ffc107;">
+                <h4 style="margin: 0 0 10px 0; color: #856404;">💡 Important Information</h4>
+                <ul style="margin: 0; padding-left: 20px; color: #856404;">
+                    <li>Keep this email as your confirmation receipt</li>
+                    <li>Bring a valid ID to the event for check-in</li>
+                    <li>This confirmation is non-transferable</li>
+                </ul>
+            </div>
+
+            <p>We can't wait to see you at the event! If you have any questions, feel free to reply to this email.</p>
+
+            <p>Best regards,<br>
+            <strong>The Event Team</strong></p>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>This email confirms your payment and registration for {{ event }}.</p>
+            <p>If you have any questions about your registration, please contact our support team.</p>
+            <p>&copy; {% now "Y" %} Your Company Name. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

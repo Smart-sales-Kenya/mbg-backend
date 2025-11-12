@@ -1,10 +1,25 @@
-Hi {{ name }},
+Hello {{ name }},
 
 Thank you for registering for {{ event }}!
 
-Date: {{ date }}
-Location: {{ location }}
+Event Details:
+- Date: {{ date|date:"F j, Y" }}
+- Location: {{ location }}
 
-We look forward to seeing you there!
+{% if is_free_event %}
+Your registration for this free event has been confirmed! We look forward to seeing you.
 
-— MBG Growth Hub Team
+You'll receive event reminders and updates as we get closer to the date.
+{% else %}
+Complete Your Payment:
+To secure your spot, please complete your payment of {{ amount }} {{ currency }}.
+
+Payment URL: {{ payment_url }}
+
+Note: Your registration will be fully confirmed once payment is completed.
+{% endif %}
+
+Best regards,
+The {{ event }} Team
+
+This is an automated email. Please do not reply to this message.

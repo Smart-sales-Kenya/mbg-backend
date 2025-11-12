@@ -1,0 +1,41 @@
+PAYMENT CONFIRMED - {{ event }}
+
+Dear {{ name }},
+
+✅ PAYMENT SUCCESSFUL! Your payment has been processed and your registration for "{{ event }}" is now fully confirmed.
+
+PAYMENT SUMMARY:
+----------------
+Amount Paid: {{ amount }} {{ currency }}
+Transaction ID: {{ transaction_id }}
+Payment Date: {% now "F j, Y" %}
+Status: COMPLETED
+
+EVENT DETAILS:
+--------------
+Event: {{ event }}
+Date: {{ date|date:"F j, Y" }}
+Location: {{ location }}
+
+WHAT HAPPENS NEXT?
+------------------
+1. Save the date - Add this event to your calendar
+2. Watch your inbox - You'll receive event updates and reminders
+3. Prepare - Check if you need to bring anything specific
+4. Join early - Arrive 15 minutes before the event starts
+
+IMPORTANT INFORMATION:
+----------------------
+- Keep this email as your confirmation receipt
+- Bring a valid ID to the event for check-in
+- This confirmation is non-transferable
+
+We can't wait to see you at the event! If you have any questions, please reply to this email.
+
+Best regards,
+The Event Team
+
+---
+This email confirms your payment and registration for {{ event }}.
+If you have any questions about your registration, please contact our support team.
+© {% now "Y" %} Your Company Name. All rights reserved.

@@ -19,24 +19,33 @@ urlpatterns = [
     path('hello/', views.hello_world),
     path('contact/', views.contact_view, name='contact'),
     path('team/', views.team_list, name='team-list'),
+    
     path('gallery/', views.gallery_list, name='gallery_list'),
     path('gallery/categories/', views.category_list, name='category_list'),
     path('testimonials/', views.get_testimonials, name='testimonial-list'),
     
      # Event endpoints
     path('events/', views.event_list, name='api-events-list'),
-    path('events/<int:pk>/', views.event_detail, name='api-event-detail'),
+    path('events/<str:pk>/', views.event_detail, name='api-event-detail'),
 
     # Event registration endpoints
     path('registrations/', views.event_registration_list, name='api-registrations'),
-    path('events/<int:event_id>/registrations/', views.event_registration_by_event, name='api-registrations-by-event'),
+    path('events/<str:event_id>/registrations/', views.event_registration_by_event, name='api-registrations-by-event'),
     
-    path('program/register/', views.program_register_endpoint, name='program-register'),
+   
+  # Program URLs
+    path('program/<str:program_id>/register/', views.program_register_endpoint, name='program-register'),
     path('program/list/', views.program_list_endpoint, name='program-list'),
-
     
+    # Program Payment URLs
+    path('program-payments/initiate/<str:registration_id>/', views.initiate_program_payment, name='initiate-program-payment'),
+# urls.py
+    path('program-payments/status/<uuid:payment_id>/', views.program_payment_status, name='program-payment-status'),
 
-
-
-
+     # Payment URLs
+    path('payments/initiate/<int:registration_id>/', views.initiate_payment, name='initiate-payment'),
+    path('payments/status/<uuid:payment_id>/', views.payment_status, name='payment-status'),
+    path('payments/pesapal-callback/', views.pesapal_callback, name='pesapal-callback'),
+    path('payments/pesapal-ipn/', views.pesapal_ipn, name='pesapal-ipn'),
+    
 ]

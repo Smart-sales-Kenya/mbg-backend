@@ -1,20 +1,71 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <style>
-    body { font-family: Arial, sans-serif; background: #f7f7f7; padding: 20px; }
-    .container { background: #fff; padding: 30px; border-radius: 10px; }
-    h2 { color: #2b7090; }
-  </style>
+    <meta charset="utf-8">
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }
+        .content { background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px; }
+        .footer { text-align: center; margin-top: 20px; padding: 20px; color: #666; font-size: 12px; }
+        .button { background: #667eea; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; display: inline-block; margin: 10px 0; }
+        .info-box { background: white; padding: 15px; border-left: 4px solid #667eea; margin: 15px 0; }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h2>Hi {{ name }},</h2>
-    <p>Thank you for registering for <strong>{{ event }}</strong>!</p>
-    <p><b>Date:</b> {{ date }}<br>
-       <b>Location:</b> {{ location }}</p>
-    <p>We look forward to seeing you there!</p>
-    <p>— MBG Growth Hub Team</p>
-  </div>
+    <div class="container">
+        <div class="header">
+            <h1>🎉 You're Registered!</h1>
+            <h2>{{ event }}</h2>
+        </div>
+        
+        <div class="content">
+            <p>Dear <strong>{{ name }}</strong>,</p>
+            
+            <p>Thank you for registering for <strong>{{ event }}</strong>! We're excited to have you join us.</p>
+            
+            <div class="info-box">
+                <h3>Event Details:</h3>
+                <p><strong>📅 Date:</strong> {{ date|date:"F j, Y" }}</p>
+                <p><strong>📍 Location:</strong> {{ location }}</p>
+                <p><strong>🎯 Status:</strong> Confirmed</p>
+            </div>
+
+            {% if is_free_event %}
+            <div class="info-box" style="border-left-color: #28a745;">
+                <h3>✅ Free Event</h3>
+                <p>This is a free event - no payment required. Your registration is fully confirmed!</p>
+            </div>
+            {% else %}
+            <div class="info-box" style="border-left-color: #ffc107;">
+                <h3>💳 Payment Required</h3>
+                <p><strong>Amount:</strong> {{ amount }} {{ currency }}</p>
+                <p>Please complete your payment to secure your spot:</p>
+                <p style="text-align: center;">
+                    <a href="{{ payment_url }}" class="button">Complete Payment Now</a>
+                </p>
+                <p style="font-size: 12px; color: #666; text-align: center;">
+                    Can't pay now? Save this link: <a href="{{ payment_url }}">{{ payment_url }}</a>
+                </p>
+            </div>
+            {% endif %}
+
+            <p><strong>What's Next?</strong></p>
+            <ul>
+                <li>You'll receive a reminder email before the event</li>
+                <li>Add this event to your calendar</li>
+                <li>Follow us on social media for updates</li>
+            </ul>
+
+            <p>If you have any questions, please don't hesitate to contact us.</p>
+            
+            <p>Best regards,<br>The Event Team</p>
+        </div>
+        
+        <div class="footer">
+            <p>This email was sent to {{ email }}. Please do not reply to this email.</p>
+            <p>&copy; {% now "Y" %} Your Company Name. All rights reserved.</p>
+        </div>
+    </div>
 </body>
 </html>

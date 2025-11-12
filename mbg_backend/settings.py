@@ -22,8 +22,6 @@ ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1"
 ]
-
-# APPLICATIONS
 INSTALLED_APPS = [
     "jazzmin",
     "django.contrib.admin",
@@ -32,9 +30,19 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "rest_framework",
-    "rest_framework_simplejwt",
-    "corsheaders",
+
+    # Third-party apps
+    'rest_framework',
+    'rest_framework.authtoken',   # ✅ only once
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',      # optional
+    'dj_rest_auth',
+    'dj_rest_auth.registration',  # for registration endpoints
+    'rest_framework_simplejwt',
+    'corsheaders',
+
+    # Your apps
     "api",
 ]
 
@@ -45,6 +53,7 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+      "allauth.account.middleware.AccountMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
@@ -103,7 +112,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CORS_ALLOWED_ORIGINS = [
     "https://smartsales.co.ke",
     "https://api.smartsales.co.ke",  # add subdomain
-    "http://localhost:3000",
+    "http://localhost:8080",
     "http://127.0.0.1:3000",
 ]
 CORS_ALLOW_CREDENTIALS = True
@@ -111,7 +120,7 @@ CORS_ALLOW_CREDENTIALS = True
 CSRF_TRUSTED_ORIGINS = [
     "https://smartsales.co.ke",
     "https://api.smartsales.co.ke",  # add subdomain
-    "http://localhost:3000",
+    "http://localhost:8080",
     "http://127.0.0.1:3000",
 ]
 
@@ -165,3 +174,51 @@ ADMIN_EMAILS = [
     os.getenv("ADMIN_EMAIL_1"),
     os.getenv("ADMIN_EMAIL_2")
 ]
+# settings.py
+FRONTEND_URL = os.getenv('FRONTEND_URL', 'http://localhost:8080')
+
+# Add to your settings.py
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+        'file': {
+            'class': 'logging.FileHandler',
+            'filename': 'debug.log',
+        },
+    },
+    'root': {
+        'handlers': ['console', 'file'],
+        'level': 'DEBUG',
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'mbg_backend': {  # Replace with your actual app name
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+    },
+}
+
+# PesaPal Configuration
+PESAPAL_CONFIG = {
+    'CONSUMER_KEY': os.getenv('PESAPAL_CONSUMER_KEY', ''),
+    'CONSUMER_SECRET': os.getenv('PESAPAL_CONSUMER_SECRET', ''),
+    # Use sandbox for testing, live for production
+    'BASE_URL': os.getenv('PESAPAL_BASE_URL', 'https://cybqa.pesapal.com/pesapalv3'),  # Sandbox
+    # 'BASE_URL': 'https://pay.pesapal.com/v3',  # Production
+    'CALLBACK_URL': os.getenv('PESAPAL_CALLBACK_URL', 'http://127.0.0.1:8000/api/payments/pesapal-callback/'),
+    'IPN_URL': os.getenv('PESAPAL_IPN_URL', 'http://127.0.0.1:8000/api/payments/pesapal-ipn/'),
+}
+
+# Environment variables for security
+PESAPAL_CONSUMER_KEY = os.getenv('PESAPAL_CONSUMER_KEY')
+PESAPAL_CONSUMER_SECRET = os.getenv('PESAPAL_CONSUMER_SECRET')

@@ -6,7 +6,59 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 # api/serializers.py
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+import logging
+logger = logging.getLogger(__name__)
 
+# In your EventRegistrationSerializer class, add this:
+class EventRegistrationSerializer(serializers.ModelSerializer):
+    # ... your existing fields ...
+    
+    def validate(self, data):
+        """
+        Add validation debugging
+        """
+        logger.info("=== SERIALIZER VALIDATION START ===")
+        logger.info(f"Data being validated: {data}")
+        
+        # Check required fields
+        required_fields = ['full_name', 'email', 'phone', 'company', 'job_title']
+        for field in required_fields:
+            value = data.get(field)
+            logger.info(f"Required field '{field}': '{value}' (exists: {field in data}, truthy: {bool(value)})")
+        
+        # Check event field specifically
+        event_value = data.get('event')
+        logger.info(f"Event field in validation: '{event_value}' (type: {type(event_value)})")
+        
+        logger.info("=== SERIALIZER VALIDATION END ===")
+        return data
+    
+    def create(self, validated_data):
+        """
+        Add creation debugging
+        """
+        logger.info("=== SERIALIZER CREATE START ===")
+        logger.info(f"Validated data for creation: {validated_data}")
+        
+        # The event should come from the context, not from validated_data
+        event = self.context.get('event')
+        logger.info(f"Event from context: {event}")
+        
+        # Remove event from validated_data if it exists (it shouldn't)
+        if 'event' in validated_data:
+            logger.warning(f"Event found in validated_data: {validated_data['event']}")
+            del validated_data['event']
+        
+        logger.info(f"Final validated data without event: {validated_data}")
+        
+        try:
+            instance = EventRegistration.objects.create(event=event, **validated_data)
+            logger.info(f"Registration instance created: {instance}")
+            logger.info("=== SERIALIZER CREATE COMPLETED ===")
+            return instance
+        except Exception as e:
+            logger.error(f"Error in serializer create: {str(e)}")
+            raise
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     username_field = 'email'  # use email for login
 
@@ -86,18 +138,34 @@ class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
         fields = [
-            'id', 'title', 'category', 'start_date', 'end_date', 
-            'start_time', 'end_time', 'location', 'participants_limit', 
-            'duration', 'description', 'investment_amount', 'currency', 
-            'is_free', 'status', 'registration_open', 'image'
+            'id',
+            'title',
+            'subtitle',
+            'tagline',
+            'category',
+            'start_date',
+            'end_date',
+            'start_time',
+            'end_time',
+            'location',
+            'participants_limit',
+            'duration',
+            'description',
+            'investment_amount',
+            'currency',
+            'is_free',
+            'status',
+            'registration_open',
+            'image',
         ]
 
 from rest_framework import serializers
-from .models import EventRegistration, Event
-
+from .models import EventRegistration, Event, Payment
 class EventRegistrationSerializer(serializers.ModelSerializer):
     event_title = serializers.ReadOnlyField(source='event.title')
     is_free_event = serializers.ReadOnlyField(source='event.is_free')
+    payment_status = serializers.SerializerMethodField()
+    payment_amount = serializers.SerializerMethodField()
 
     class Meta:
         model = EventRegistration
@@ -115,24 +183,69 @@ class EventRegistrationSerializer(serializers.ModelSerializer):
             'experience_level',
             'goals',
             'heard_about',
-            'payment_status',
-            'payment_amount',
+            'registration_status',
             'registration_date',
+            'payment_status',     # from related Payment model
+            'payment_amount',     # from related Payment model
         ]
-        read_only_fields = ['payment_status', 'payment_amount', 'registration_date', 'event_title', 'is_free_event']
+        read_only_fields = [
+            'id', 'registration_date', 'event_title', 'is_free_event', 
+            'registration_status', 'payment_status', 'payment_amount'
+        ]
+
+    def get_payment_status(self, obj):
+        """Get payment status from related Payment model"""
+        if hasattr(obj, 'payment') and obj.payment:
+            return obj.payment.payment_status
+        elif obj.event.is_free:
+            return 'free'
+        return 'pending'
+
+    def get_payment_amount(self, obj):
+        """Get payment amount from related Payment model"""
+        if hasattr(obj, 'payment') and obj.payment:
+            return obj.payment.amount
+        elif obj.event.is_free:
+            return 0
+        return obj.event.investment_amount
 
     def create(self, validated_data):
         """
-        Automatically set payment_status and amount for free events
+        Create EventRegistration and related Payment if needed
         """
-        event = validated_data.get('event')
-        if event.is_free:
-            validated_data['payment_status'] = 'free'
-            validated_data['payment_amount'] = 0
+        # Remove any payment fields that might accidentally be in validated_data
+        validated_data.pop('payment_status', None)
+        validated_data.pop('payment_amount', None)
+        
+        # Create the registration
+        registration = EventRegistration.objects.create(**validated_data)
+        
+        # Create Payment record for paid events
+        if not registration.event.is_free:
+            Payment.objects.create(
+                registration=registration,
+                amount=registration.event.investment_amount,
+                currency=registration.event.currency,
+                customer_email=registration.email,
+                customer_phone=registration.phone,
+                description=f"Event registration: {registration.event.title}",
+                payment_method='pesapal',  # Default to PesaPal
+                payment_status='pending'
+            )
         else:
-            validated_data['payment_status'] = 'pending'
-            validated_data['payment_amount'] = event.investment_amount
-        return super().create(validated_data)
+            # For free events, you might still want to create a payment record with status 'free'
+            Payment.objects.create(
+                registration=registration,
+                amount=0,
+                currency=registration.event.currency,
+                customer_email=registration.email,
+                customer_phone=registration.phone,
+                description=f"Free event registration: {registration.event.title}",
+                payment_method='free',
+                payment_status='free'
+            )
+        
+        return registration
 
 from rest_framework import serializers
 from .models import ProgramCategory, Program, ProgramFeature, ProgramRegistration
@@ -160,7 +273,7 @@ class ProgramSerializer(serializers.ModelSerializer):
         model = Program
         fields = [
             'id', 'title', 'category', 'duration', 'price', 'description',
-            'focus', 'outcome', 'skills', 'format', 'badge', 'icon_name', 'features'
+            'focus', 'outcome', 'skills', 'format', 'badge',  'features'
         ]
 
 
@@ -173,3 +286,36 @@ class ProgramRegistrationSerializer(serializers.ModelSerializer):
             'company_name', 'role', 'team_size', 'challenges',
             'has_paid', 'payment_reference', 'registered_at'
         ]
+
+
+class PaymentSerializer(serializers.ModelSerializer):
+    registration_details = serializers.SerializerMethodField()
+    event_title = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Payment
+        fields = [
+            'id',
+            'amount',
+            'currency',
+            'payment_method',
+            'payment_status',
+            'registration_details',
+            'event_title',
+            'pesapal_order_tracking_id',
+            'pesapal_payment_url',
+            'payment_initiated_at',
+            'payment_completed_at',
+            'created_at',
+        ]
+        read_only_fields = ['id', 'created_at']
+
+    def get_registration_details(self, obj):
+        return {
+            'full_name': obj.registration.full_name,
+            'email': obj.registration.email,
+            'phone': obj.registration.phone
+        }
+
+    def get_event_title(self, obj):
+        return obj.registration.event.title
