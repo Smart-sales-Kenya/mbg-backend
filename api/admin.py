@@ -296,92 +296,124 @@ class ProgramRegistrationAdmin(admin.ModelAdmin):
     
 from django.contrib import admin
 from .models import ProgramPayment
+from django.contrib import admin
+from django.utils.html import format_html
+from .models import ProgramPayment
 
 @admin.register(ProgramPayment)
 class ProgramPaymentAdmin(admin.ModelAdmin):
     list_display = (
-        'id',
-        'registration',
-        'amount',
-        'currency',
-        'payment_method',
-        'payment_status',
-        'pesapal_order_tracking_id',
-        'pesapal_transaction_id',
-        'payment_initiated_at',
-        'payment_completed_at',
-        'created_at',
+        'truncated_id', 
+        'customer_email', 
+        'amount_currency', 
+        'payment_method', 
+        'payment_status_badge', 
+        'program_title', 
+        'payment_initiated_at'
     )
     list_filter = (
-        'payment_status',
-        'payment_method',
-        'currency',
-        'created_at',
+        'payment_status', 
+        'payment_method', 
+        'currency', 
+        'payment_initiated_at'
     )
     search_fields = (
-        'id',
-        'registration__full_name',
-        'registration__email',
-        'pesapal_order_tracking_id',
-        'pesapal_transaction_id',
-        'pesapal_merchant_reference',
-        'customer_email',
-        'customer_phone',
+        'customer_email', 
+        'customer_phone', 
+        'pesapal_order_tracking_id', 
+        'registration__full_name', 
+        'registration__program__title'
     )
     readonly_fields = (
-        'id',
-        'created_at',
-        'updated_at',
-        'payment_initiated_at',
-        'payment_completed_at',
-        'pesapal_order_tracking_id',
-        'pesapal_transaction_id',
-        'pesapal_merchant_reference',
-        'pesapal_payment_url',
+        'id', 
+        'created_at', 
+        'updated_at', 
+        'registration_link', 
+        'pesapal_order_tracking_id', 
+        'pesapal_transaction_id'
     )
-    ordering = ('-created_at',)
-    date_hierarchy = 'created_at'
-    
     fieldsets = (
-        ("Payment Details", {
-            "fields": (
-                'registration',
-                'amount',
-                'currency',
-                'payment_method',
-                'payment_status',
-                'description',
-            ),
+        ('Payment Information', {
+            'fields': (
+                'id', 
+                'payment_status', 
+                'amount', 
+                'currency', 
+                'payment_method'
+            )
         }),
-        ("Customer Information", {
-            "fields": (
-                'customer_email',
-                'customer_phone',
+        ('PesaPal Details', {
+            'fields': (
+                'pesapal_order_tracking_id', 
+                'pesapal_transaction_id', 
+                'pesapal_merchant_reference', 
+                'pesapal_payment_url'
             ),
+            'classes': ('collapse',)
         }),
-        ("PesaPal Info", {
-            "classes": ('collapse',),
-            "fields": (
-                'pesapal_order_tracking_id',
-                'pesapal_transaction_id',
-                'pesapal_merchant_reference',
-                'pesapal_payment_url',
-            ),
+        ('Customer Information', {
+            'fields': (
+                'customer_email', 
+                'customer_phone', 
+                'description'
+            )
         }),
-        ("Timestamps", {
-            "classes": ('collapse',),
-            "fields": (
-                'payment_initiated_at',
-                'payment_completed_at',
-                'created_at',
-                'updated_at',
+        ('Registration Link', {
+            'fields': ('registration_link',)
+        }),
+        ('Timestamps', {
+            'fields': (
+                'payment_initiated_at', 
+                'payment_completed_at', 
+                'created_at', 
+                'updated_at'
             ),
+            'classes': ('collapse',)
         }),
     )
-
-    def has_add_permission(self, request):
-        """
-        Prevent manual creation from admin — payments should be generated
-        through the registration/payment workflow.
-        """
-        return False
+    
+    def truncated_id(self, obj):
+        return str(obj.id)[:8] + "..."
+    truncated_id.short_description = "Payment ID"
+    
+    def amount_currency(self, obj):
+        return f"{obj.amount} {obj.currency}"
+    amount_currency.short_description = "Amount"
+    
+    def payment_status_badge(self, obj):
+        status_colors = {
+            'pending': 'orange',
+            'initiated': 'blue',
+            'completed': 'green',
+            'failed': 'red',
+            'cancelled': 'gray',
+            'refunded': 'purple',
+        }
+        color = status_colors.get(obj.payment_status, 'gray')
+        return format_html(
+            '<span style="background-color: {}; color: white; padding: 2px 8px; border-radius: 12px; font-size: 12px;">{}</span>',
+            color,
+            obj.get_payment_status_display().upper()
+        )
+    payment_status_badge.short_description = "Status"
+    
+    def program_title(self, obj):
+        if obj.registration and obj.registration.program:
+            return obj.registration.program.title
+        return "No Program"
+    program_title.short_description = "Program"
+    
+    def registration_link(self, obj):
+        if obj.registration:
+            url = f"/admin/api/programregistration/{obj.registration.id}/change/"
+            return format_html(
+                '<a href="{}">{} - {}</a>',
+                url,
+                obj.registration.full_name,
+                obj.registration.email
+            )
+        return "No Registration"
+    registration_link.short_description = "Registration"
+    
+    def get_queryset(self, request):
+        return super().get_queryset(request).select_related('registration', 'registration__program')

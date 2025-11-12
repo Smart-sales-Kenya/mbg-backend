@@ -47,7 +47,7 @@ urlpatterns = [
     #programs
     path('program-payments/initiate/<int:registration_id>/', views.initiate_program_payment, name='initiate-program-payment'),
     path('program-payments/status/<uuid:payment_id>/', views.program_payment_status, name='program-payment-status'),
-    path('program-payments/pesapal-callback/', views.program_payment_callback, name='program-payment-callback'),
+    # path('program-payments/pesapal-callback/', views.program_payment_callback, name='program-payment-callback'),
 
     
 ]

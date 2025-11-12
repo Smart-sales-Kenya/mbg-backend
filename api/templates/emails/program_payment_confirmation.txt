@@ -1,0 +1,16 @@
+✅ Payment Confirmed!
+
+Hi {{ full_name }},
+
+We’ve successfully received your payment for the {{ program_title }} program.
+
+Program: {{ program_title }}
+Duration: {{ duration }}
+Amount Paid: {{ amount }} {{ currency }}
+Transaction ID: {{ transaction_id }}
+
+Thank you for joining us! We’re excited to have you in the program.
+
+If you have any questions, reach out to us at {{ support_email }}.
+
+— The {{ program_title }} Team

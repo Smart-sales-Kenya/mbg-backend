@@ -256,6 +256,7 @@ def program_list_endpoint(request):
 from .models import ProgramPayment
 # views.py
 # views.py - Your existing program registration endpoint
+
 @api_view(['POST'])
 def program_register_endpoint(request, program_id):
     """Register for a program and return registration ID for payment"""
@@ -267,15 +268,22 @@ def program_register_endpoint(request, program_id):
             # Save registration
             registration = serializer.save(program=program)
             
-            # Return registration ID so frontend can initiate payment
+            # ✅ Send confirmation and admin emails
+            try:
+                send_program_registration_emails(registration)
+            except Exception as email_error:
+                logger.error(f"Email sending failed: {email_error}")
+
+            # Return registration response
             return Response({
                 'registration_id': registration.id,
                 'program_title': program.title,
                 'price': program.price,
                 'message': 'Registration successful. Proceed to payment.',
-                'payment_required': True,  # Indicate that payment is needed
+                'payment_required': True,
                 'next_step': f'/api/program-payments/initiate/{registration.id}/'
             }, status=status.HTTP_201_CREATED)
+
             
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
@@ -429,7 +437,7 @@ def payment_status(request, payment_id):
 from django.http import HttpResponseRedirect
 @api_view(['GET', 'POST'])
 def pesapal_callback(request):
-    """Handle PesaPal callback after payment - supports both GET and POST"""
+    """Handle PesaPal callback for BOTH event and program payments"""
     try:
         # Extract parameters
         if request.method == 'GET':
@@ -439,128 +447,166 @@ def pesapal_callback(request):
             order_tracking_id = request.GET.get('OrderTrackingId') or request.data.get('OrderTrackingId')
             order_merchant_reference = request.GET.get('OrderMerchantReference') or request.data.get('OrderMerchantReference')
         
-        logger.info(f"🔔 PesaPal Callback Received")
-        logger.info(f"OrderTrackingId: {order_tracking_id}")
-        logger.info(f"OrderMerchantReference: {order_merchant_reference}")
+        logger.info(f"🔔 UNIFIED PesaPal Callback Received - OrderTrackingId: {order_tracking_id}")
         
         if not order_tracking_id:
-            # If no tracking ID, redirect to frontend with error
             frontend_base_url = getattr(settings, 'FRONTEND_URL', 'http://localhost:8080')
             frontend_url = f"{frontend_base_url}/payment-result?status=error&message=Missing order tracking ID"
-            logger.error(f"❌ Missing order tracking ID")
             return HttpResponseRedirect(frontend_url)
         
-        # Get payment record
+        # Try EVENT payment first
         try:
             payment = Payment.objects.get(pesapal_order_tracking_id=order_tracking_id)
-            logger.info(f"✅ Payment found: {payment.id}")
-            logger.info(f"Current payment status: {payment.payment_status}")
-            logger.info(f"Current registration status: {payment.registration.registration_status}")
-            
+            logger.info(f"✅ Processing as EVENT payment: {payment.id}")
+            return handle_event_payment_callback(request, payment, order_tracking_id)
         except Payment.DoesNotExist:
-            logger.error(f"❌ No payment found for tracking ID: {order_tracking_id}")
+            pass
+        
+        # Try PROGRAM payment
+        try:
+            payment = ProgramPayment.objects.get(pesapal_order_tracking_id=order_tracking_id)
+            logger.info(f"✅ Processing as PROGRAM payment: {payment.id}")
+            return handle_program_payment_callback(request, payment, order_tracking_id)
+        except ProgramPayment.DoesNotExist:
+            logger.error(f"❌ No payment found (event or program) for tracking ID: {order_tracking_id}")
             frontend_base_url = getattr(settings, 'FRONTEND_URL', 'http://localhost:8080')
             frontend_url = f"{frontend_base_url}/payment-result?status=error&message=Payment not found"
             return HttpResponseRedirect(frontend_url)
         
-        # Initialize PesaPal service and get transaction status
-        pesapal = PesaPalService()
-        logger.info(f"🔄 Checking transaction status with PesaPal...")
-        status_response = pesapal.get_transaction_status(order_tracking_id)
-        
-        logger.info(f"📡 PesaPal status response: {status_response}")
-        
-        payment_updated = False
-        payment_status = payment.payment_status
-        registration_status = payment.registration.registration_status
-        
-        if status_response:
-            status_code = status_response.get('status_code')
-            payment_method = status_response.get('payment_method')
-            transaction_id = status_response.get('transaction_id')
-            payment_status_description = status_response.get('payment_status_description')
-            
-            logger.info(f"🔍 Status Details:")
-            logger.info(f"  - Status Code: {status_code} (type: {type(status_code)})")
-            logger.info(f"  - Payment Method: {payment_method}")
-            logger.info(f"  - Transaction ID: {transaction_id}")
-            logger.info(f"  - Status Description: {payment_status_description}")
-            
-            # ✅ FIXED: Compare with both string and integer values
-            if status_code in [1, '1']:  # ✅ COMPLETED (handles both string and integer)
-                payment.payment_status = 'completed'
-                payment.payment_completed_at = timezone.now()
-                payment.payment_method = payment_method or 'pesapal'
-                payment.pesapal_transaction_id = transaction_id
-                
-                # Update registration status
-                payment.registration.registration_status = 'confirmed'
-                payment.registration.save()
-                
-                payment_status = 'completed'
-                registration_status = 'confirmed'
-                payment_updated = True
-                
-                logger.info(f"✅ PAYMENT COMPLETED! Registration confirmed for {payment.registration.email}")
-                
-                # Send payment confirmation email
-                try:
-                    send_payment_confirmation_email(payment)
-                    logger.info("✅ Payment confirmation email sent successfully")
-                except Exception as email_error:
-                    logger.error(f"❌ Failed to send payment confirmation email: {str(email_error)}")
-                
-            elif status_code in [2, '2']:  # Failed
-                payment.payment_status = 'failed'
-                payment_status = 'failed'
-                payment_updated = True
-                logger.warning(f"❌ Payment failed for {payment.registration.email}")
-            
-            elif status_code in [0, '0']:  # Pending
-                payment.payment_status = 'pending'
-                payment_status = 'pending'
-                payment_updated = True
-                logger.info(f"⏳ Payment still pending for {payment.registration.email}")
-            
-            else:
-                logger.warning(f"⚠️ Unknown payment status code: {status_code} (type: {type(status_code)})")
-                # Keep current status if unknown
-            
-            if payment_updated:
-                payment.save()
-        
-        # ✅ FIXED: PROPERLY construct frontend URL using settings
-        frontend_base_url = getattr(settings, 'FRONTEND_URL', 'http://localhost:8080')
-        
-        # Ensure the base URL doesn't have a trailing slash
-        frontend_base_url = frontend_base_url.rstrip('/')
-        
-        # Build the complete redirect URL
-        frontend_url = f"{frontend_base_url}/payment-result?status={payment_status}&order_tracking_id={order_tracking_id}"
-        
-        if payment_status == 'completed':
-            frontend_url += "&message=Payment completed successfully"
-        elif payment_status == 'failed':
-            frontend_url += "&message=Payment failed. Please try again."
-        elif payment_status == 'pending':
-            frontend_url += "&message=Payment is still processing"
-        
-        logger.info(f"🔀 Redirecting to frontend: {frontend_url}")
-        
-        # Redirect to frontend
-        return HttpResponseRedirect(frontend_url)
-        
     except Exception as e:
-        logger.error(f"❌ PesaPal callback processing failed: {str(e)}")
+        logger.error(f"❌ Unified callback processing failed: {str(e)}")
         import traceback
         logger.error(f"Traceback: {traceback.format_exc()}")
         
-        # ✅ FIXED: Proper error redirect URL
         frontend_base_url = getattr(settings, 'FRONTEND_URL', 'http://localhost:8080')
         frontend_base_url = frontend_base_url.rstrip('/')
         frontend_url = f"{frontend_base_url}/payment-result?status=error&message=Callback processing failed"
         return HttpResponseRedirect(frontend_url)
-   
+
+def handle_event_payment_callback(request, payment, order_tracking_id):
+    """Handle event payment callback"""
+    pesapal = PesaPalService()
+    status_response = pesapal.get_transaction_status(order_tracking_id)
+    
+    logger.info(f"📡 Event payment status response: {status_response}")
+    
+    payment_updated = False
+    payment_status = payment.payment_status
+    
+    if status_response:
+        status_code = status_response.get('status_code')
+        
+        if status_code in [1, '1']:  # COMPLETED
+            payment.payment_status = 'completed'
+            payment.payment_completed_at = timezone.now()
+            payment.payment_method = status_response.get('payment_method') or 'pesapal'
+            payment.pesapal_transaction_id = status_response.get('transaction_id')
+            
+            # Update registration status
+            payment.registration.registration_status = 'confirmed'
+            payment.registration.save()
+            
+            payment_status = 'completed'
+            payment_updated = True
+            
+            logger.info(f"✅ EVENT PAYMENT COMPLETED! Registration confirmed for {payment.registration.email}")
+            
+            # Send payment confirmation email
+            try:
+                send_program_payment_confirmation_email(payment)
+                logger.info("✅ Event payment confirmation email sent successfully")
+            except Exception as email_error:
+                logger.error(f"❌ Failed to send event payment confirmation email: {str(email_error)}")
+            
+        elif status_code in [2, '2']:  # Failed
+            payment.payment_status = 'failed'
+            payment_status = 'failed'
+            payment_updated = True
+            
+        elif status_code in [0, '0']:  # Pending
+            payment.payment_status = 'pending'
+            payment_status = 'pending'
+            payment_updated = True
+        
+        if payment_updated:
+            payment.save()
+    
+    # Redirect to frontend
+    frontend_base_url = getattr(settings, 'FRONTEND_URL', 'http://localhost:8080').rstrip('/')
+    frontend_url = f"{frontend_base_url}/payment-result?status={payment_status}&order_tracking_id={order_tracking_id}&type=event"
+    
+    if payment_status == 'completed':
+        frontend_url += "&message=Payment completed successfully"
+    elif payment_status == 'failed':
+        frontend_url += "&message=Payment failed. Please try again."
+    elif payment_status == 'pending':
+        frontend_url += "&message=Payment is still processing"
+    
+    logger.info(f"🔀 Redirecting event payment to: {frontend_url}")
+    return HttpResponseRedirect(frontend_url)
+
+def handle_program_payment_callback(request, payment, order_tracking_id):
+    """Handle program payment callback"""
+    program_payment_service = ProgramPaymentService()
+    status_response = program_payment_service.get_transaction_status(order_tracking_id)
+    
+    logger.info(f"📡 Program payment status response: {status_response}")
+    
+    payment_updated = False
+    payment_status = payment.payment_status
+    
+    if status_response:
+        status_code = status_response.get('status_code')
+        
+        if status_code in [1, '1']:  # COMPLETED
+            payment.payment_status = 'completed'
+            payment.payment_completed_at = timezone.now()
+            payment.payment_method = status_response.get('payment_method') or 'pesapal'
+            payment.pesapal_transaction_id = status_response.get('transaction_id')
+            
+            # Update registration payment status
+            payment.registration.has_paid = True
+            payment.registration.save()
+            
+            payment_status = 'completed'
+            payment_updated = True
+            
+            logger.info(f"✅ PROGRAM PAYMENT COMPLETED! Payment ID: {payment.id}")
+            
+            # Send program payment confirmation email
+            try:
+                send_program_payment_confirmation_email(payment)
+                logger.info("✅ Program payment confirmation email sent successfully")
+            except Exception as email_error:
+                logger.error(f"❌ Failed to send program payment confirmation email: {str(email_error)}")
+            
+        elif status_code in [2, '2']:  # Failed
+            payment.payment_status = 'failed'
+            payment_status = 'failed'
+            payment_updated = True
+            
+        elif status_code in [0, '0']:  # Pending
+            payment.payment_status = 'pending'
+            payment_status = 'pending'
+            payment_updated = True
+        
+        if payment_updated:
+            payment.save()
+    
+    # Redirect to frontend - use program-specific page
+    frontend_base_url = getattr(settings, 'FRONTEND_URL', 'http://localhost:8080').rstrip('/')
+    frontend_url = f"{frontend_base_url}/program-payment-result?status={payment_status}&order_tracking_id={order_tracking_id}&payment_id={payment.id}"
+    
+    if payment_status == 'completed':
+        frontend_url += "&message=Payment completed successfully"
+    elif payment_status == 'failed':
+        frontend_url += "&message=Payment failed. Please try again."
+    elif payment_status == 'pending':
+        frontend_url += "&message=Payment is still processing"
+    
+    logger.info(f"🔀 Redirecting program payment to: {frontend_url}")
+    return HttpResponseRedirect(frontend_url)
+
 @api_view(['POST'])
 def pesapal_ipn(request):
     """
@@ -633,7 +679,7 @@ def pesapal_ipn(request):
                     
                     # Send event payment confirmation email
                     try:
-                        send_payment_confirmation_email(payment)
+                        send_program_payment_confirmation_email(payment)
                         logger.info("✅ Event payment confirmation email sent successfully")
                     except Exception as email_error:
                         logger.error(f"❌ Failed to send event payment confirmation email: {str(email_error)}")
@@ -641,6 +687,7 @@ def pesapal_ipn(request):
                 elif payment_type == 'program':
                     # Update program registration payment status
                     payment.registration.has_paid = True
+                    payment.registration.payment_status = 'completed'  # Add this field if it exists
                     payment.registration.save()
                     
                     # Send program payment confirmation email
@@ -697,35 +744,66 @@ def pesapal_ipn(request):
             {'error': f'IPN processing failed: {str(e)}'},
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
+import logging
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.conf import settings
 
-def send_payment_confirmation_email(payment):
-    """Send payment confirmation email to user"""
-    registration = payment.registration
-    event = registration.event
-    
-    context = {
-        'name': registration.full_name,
-        'event': event.title,
-        'date': event.start_date,
-        'location': event.location,
-        'amount': payment.amount,
-        'currency': payment.currency,
-        'transaction_id': payment.pesapal_transaction_id,
-    }
+logger = logging.getLogger(__name__)
 
-    subject = f"✅ Payment Confirmed for {event.title}"
-    html_content = render_to_string('emails/payment_confirmation.html', context)
-    text_content = render_to_string('emails/payment_confirmation.txt', context)
+def send_program_payment_confirmation_email(payment):
+    """Send payment confirmation email to the user and admins."""
+    try:
+        registration = payment.registration
+        program = registration.program
 
-    msg = EmailMultiAlternatives(
-        subject=subject,
-        body=text_content,
-        from_email=settings.DEFAULT_FROM_EMAIL,
-        to=[registration.email],
-    )
-    msg.attach_alternative(html_content, "text/html")
-    msg.send(fail_silently=False)
-    
+        context = {
+            'full_name': registration.full_name,
+            'program_title': program.title,
+            'duration': getattr(program, 'duration', 'N/A'),
+            'amount': payment.amount,
+            'currency': getattr(payment, 'currency', 'KES'),
+            'transaction_id': payment.pesapal_transaction_id,
+            'support_email': settings.DEFAULT_FROM_EMAIL,
+        }
+
+        # -------- USER EMAIL --------
+        user_subject = f"✅ Payment Confirmed for {program.title}"
+        user_text = render_to_string('emails/program_payment_confirmation.txt', context)
+        user_html = render_to_string('emails/program_payment_confirmation.html', context)
+
+        user_msg = EmailMultiAlternatives(
+            subject=user_subject,
+            body=user_text,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            to=[registration.email],
+        )
+        user_msg.attach_alternative(user_html, "text/html")
+        user_msg.send(fail_silently=False)
+
+        logger.info(f"✅ Payment confirmation email sent to user: {registration.email}")
+
+        # -------- ADMIN EMAIL --------
+        if hasattr(settings, 'ADMIN_EMAILS') and settings.ADMIN_EMAILS:
+            admin_subject = f"💰 New Program Payment: {registration.full_name} - {program.title}"
+            admin_text = render_to_string('emails/program_payment_confirmation.txt', context)
+            admin_html = render_to_string('emails/program_payment_confirmation.html', context)
+
+            admin_msg = EmailMultiAlternatives(
+                subject=admin_subject,
+                body=admin_text,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                to=settings.ADMIN_EMAILS,
+            )
+            admin_msg.attach_alternative(admin_html, "text/html")
+            admin_msg.send(fail_silently=False)
+
+            logger.info(f"📩 Payment confirmation email sent to admins: {settings.ADMIN_EMAILS}")
+
+    except Exception as e:
+        logger.error(f"❌ Failed to send program payment confirmation email: {str(e)}")
+
+        
 # views.py - Add these imports
 from .models import ProgramPayment
 from .serializers import ProgramPaymentSerializer
@@ -834,113 +912,7 @@ def program_payment_status(request, payment_id):
             {'error': f'Failed to get payment status: {str(e)}'},
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
-# Add program payment callback handler
-@api_view(['GET', 'POST'])
-def program_payment_callback(request):
-    """Handle PesaPal callback for program payments"""
-    try:
-        # Extract parameters (same logic as event payment callback)
-        if request.method == 'GET':
-            order_tracking_id = request.GET.get('OrderTrackingId')
-            order_merchant_reference = request.GET.get('OrderMerchantReference')
-        else:
-            order_tracking_id = request.GET.get('OrderTrackingId') or request.data.get('OrderTrackingId')
-            order_merchant_reference = request.GET.get('OrderMerchantReference') or request.data.get('OrderMerchantReference')
         
-        logger.info(f"🔔 PROGRAM Payment Callback Received - OrderTrackingId: {order_tracking_id}, Method: {request.method}")
-        
-        if not order_tracking_id:
-            logger.error("❌ Program payment callback missing OrderTrackingId")
-            frontend_base_url = getattr(settings, 'FRONTEND_URL', 'http://localhost:8080')
-            frontend_url = f"{frontend_base_url}/program-payment-result?status=error&message=Missing order tracking ID"
-            return HttpResponseRedirect(frontend_url)
-        
-        # Get program payment record
-        try:
-            payment = ProgramPayment.objects.get(pesapal_order_tracking_id=order_tracking_id)
-            logger.info(f"✅ Program payment found: {payment.id} for tracking ID: {order_tracking_id}")
-            
-        except ProgramPayment.DoesNotExist:
-            logger.error(f"❌ No program payment found for tracking ID: {order_tracking_id}")
-            frontend_base_url = getattr(settings, 'FRONTEND_URL', 'http://localhost:8080')
-            frontend_url = f"{frontend_base_url}/program-payment-result?status=error&message=Payment not found"
-            return HttpResponseRedirect(frontend_url)
-        
-        # Check transaction status using ProgramPaymentService
-        program_payment_service = ProgramPaymentService()
-        status_response = program_payment_service.get_transaction_status(order_tracking_id)
-        
-        logger.info(f"📡 PesaPal status response for program payment: {status_response}")
-        
-        payment_updated = False
-        payment_status = payment.payment_status
-        
-        if status_response:
-            status_code = status_response.get('status_code')
-            payment_method = status_response.get('payment_method')
-            transaction_id = status_response.get('transaction_id')
-            
-            if status_code in [1, '1']:  # COMPLETED
-                payment.payment_status = 'completed'
-                payment.payment_completed_at = timezone.now()
-                payment.payment_method = payment_method or 'pesapal'
-                payment.pesapal_transaction_id = transaction_id
-                
-                # Update registration payment status
-                payment.registration.has_paid = True
-                payment.registration.save()
-                
-                payment_status = 'completed'
-                payment_updated = True
-                
-                logger.info(f"✅ PROGRAM PAYMENT COMPLETED! Payment ID: {payment.id}, Registration: {payment.registration.email}")
-                
-                # Send program payment confirmation email
-                try:
-                    send_program_payment_confirmation_email(payment)
-                    logger.info("✅ Program payment confirmation email sent successfully")
-                except Exception as email_error:
-                    logger.error(f"❌ Failed to send program payment confirmation email: {str(email_error)}")
-                
-            elif status_code in [2, '2']:  # Failed
-                payment.payment_status = 'failed'
-                payment_status = 'failed'
-                payment_updated = True
-                logger.warning(f"❌ Program payment failed for {payment.registration.email}")
-            
-            elif status_code in [0, '0']:  # Pending
-                payment.payment_status = 'pending'
-                payment_status = 'pending'
-                payment_updated = True
-                logger.info(f"⏳ Program payment still pending for {payment.registration.email}")
-            
-            if payment_updated:
-                payment.save()
-                logger.info(f"📝 Program payment updated - Status: {payment_status}, Payment ID: {payment.id}")
-        
-        # Redirect to frontend
-        frontend_base_url = getattr(settings, 'FRONTEND_URL', 'http://localhost:8080').rstrip('/')
-        frontend_url = f"{frontend_base_url}/program-payment-result?status={payment_status}&order_tracking_id={order_tracking_id}&payment_id={payment.id}"
-        
-        if payment_status == 'completed':
-            frontend_url += "&message=Payment completed successfully"
-        elif payment_status == 'failed':
-            frontend_url += "&message=Payment failed. Please try again."
-        elif payment_status == 'pending':
-            frontend_url += "&message=Payment is still processing"
-        
-        logger.info(f"🔀 Redirecting to program payment result: {frontend_url}")
-        return HttpResponseRedirect(frontend_url)
-        
-    except Exception as e:
-        logger.error(f"❌ Program payment callback processing failed: {str(e)}")
-        import traceback
-        logger.error(f"Traceback: {traceback.format_exc()}")
-        
-        frontend_base_url = getattr(settings, 'FRONTEND_URL', 'http://localhost:8080').rstrip('/')
-        frontend_url = f"{frontend_base_url}/program-payment-result?status=error&message=Callback processing failed"
-        return HttpResponseRedirect(frontend_url)
-
 def send_program_payment_confirmation_email(payment):
     """Send payment confirmation email for program registration"""
     registration = payment.registration

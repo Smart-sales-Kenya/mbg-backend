@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Payment Confirmation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f9fb;
+      color: #333;
+      line-height: 1.6;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin: 0 auto;
+      padding: 30px;
+    }
+    h2 {
+      color: #2b7090;
+      text-align: center;
+    }
+    .details {
+      margin: 20px 0;
+      background: #f2f8fa;
+      padding: 15px;
+      border-radius: 8px;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 14px;
+      color: #777;
+    }
+    .highlight {
+      color: #2b7090;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>✅ Payment Confirmed!</h2>
+    <p>Hi <strong>{{ full_name }}</strong>,</p>
+    <p>We’ve successfully received your payment for the <span class="highlight">{{ program_title }}</span> program.</p>
+
+    <div class="details">
+      <p><strong>Program:</strong> {{ program_title }}</p>
+      <p><strong>Duration:</strong> {{ duration }}</p>
+      <p><strong>Amount Paid:</strong> {{ amount }} {{ currency }}</p>
+      <p><strong>Transaction ID:</strong> {{ transaction_id }}</p>
+    </div>
+
+    <p>Thank you for joining us! We’re excited to have you in the program. Our team will contact you soon with next steps.</p>
+
+    <div class="footer">
+      <p>Need help? Contact us at <a href="mailto:{{ support_email }}">{{ support_email }}</a></p>
+      <p>— The {{ program_title }} Team</p>
+    </div>
+  </div>
+</body>
+</html>

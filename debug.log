@@ -4608,3 +4608,1282 @@ Payment successfully initiated; merchant_reference=c2d550a1-24d6-4be5-9c7b-ff1c9
 C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
 Watching for file changes with StatReloader
 "GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+Submitting order to Pesapal for payment id=8ac8e7c5-69bc-4302-ace6-d528f57823bc
+Requesting Pesapal access token.
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Auth/RequestToken HTTP/1.1" 200 564
+Pesapal token response status=200
+Obtained Pesapal access token (cached ttl=300)
+Registering IPN with Pesapal (not logging the ipn url).
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/URLSetup/RegisterIPN HTTP/1.1" 200 316
+Pesapal IPN register status=200
+Pesapal IPN registered and cached (ipn_id present).
+Sending SubmitOrderRequest to Pesapal (not logging full payload).
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Transactions/SubmitOrderRequest HTTP/1.1" 200 279
+Pesapal order submission status=200
+Payment updated: tracking_id=d637c2e0-ca64-4296-bbc3-db19aaccf98a merchant_reference=ea56ca20-059d-4c9b-b3a0-d82313b59bba
+Payment successfully initiated; merchant_reference=ea56ca20-059d-4c9b-b3a0-d82313b59bba
+"POST /api/program-payments/initiate/15/ HTTP/1.1" 200 306
+Internal Server Error: /api/program-payments/initiate/14
+Traceback (most recent call last):
+  File "C:\Users\User\Desktop\DarajaCloudSpace\backend\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\Desktop\DarajaCloudSpace\backend\venv\Lib\site-packages\django\utils\deprecation.py", line 122, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\Desktop\DarajaCloudSpace\backend\venv\Lib\site-packages\django\middleware\common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\Desktop\DarajaCloudSpace\backend\venv\Lib\site-packages\django\middleware\common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 127.0.0.1:8000/api/program-payments/initiate/14/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+"POST /api/program-payments/initiate/14 HTTP/1.1" 500 83090
+Internal Server Error: /api/program-payments/initiate/14
+Traceback (most recent call last):
+  File "C:\Users\User\Desktop\DarajaCloudSpace\backend\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\Desktop\DarajaCloudSpace\backend\venv\Lib\site-packages\django\utils\deprecation.py", line 122, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\Desktop\DarajaCloudSpace\backend\venv\Lib\site-packages\django\middleware\common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\Desktop\DarajaCloudSpace\backend\venv\Lib\site-packages\django\middleware\common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 127.0.0.1:8000/api/program-payments/initiate/14/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+"POST /api/program-payments/initiate/14 HTTP/1.1" 500 83090
+Submitting order to Pesapal for payment id=c4caca15-8128-415a-bca4-29e952e0de0a
+Sending SubmitOrderRequest to Pesapal (not logging full payload).
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Transactions/SubmitOrderRequest HTTP/1.1" 200 279
+Pesapal order submission status=200
+Payment updated: tracking_id=1433634a-6d09-426b-b69b-db1984715407 merchant_reference=641f602e-1f94-45b6-b996-c7294dbb6e97
+Payment successfully initiated; merchant_reference=641f602e-1f94-45b6-b996-c7294dbb6e97
+"POST /api/program-payments/initiate/14/ HTTP/1.1" 200 306
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/testimonials/ HTTP/1.1" 200 2
+"GET //api/program/list/ HTTP/1.1" 200 235
+"GET /admin/api/programregistration/ HTTP/1.1" 200 31666
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"POST /admin/api/programregistration/ HTTP/1.1" 200 23470
+"POST /admin/api/programregistration/ HTTP/1.1" 302 0
+"GET /admin/api/programregistration/ HTTP/1.1" 200 31486
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/testimonials/ HTTP/1.1" 200 2
+"GET //api/program/list/ HTTP/1.1" 200 235
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"POST //api/program/BVROW0/register/ HTTP/1.1" 201 194
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+Submitting order to Pesapal for payment id=fa94924b-7b80-4e9a-8d4d-f314a197b2b1
+Sending SubmitOrderRequest to Pesapal (not logging full payload).
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Transactions/SubmitOrderRequest HTTP/1.1" 200 279
+Pesapal order submission status=200
+Payment updated: tracking_id=2ce1e933-4251-46d1-88d9-db1937c44241 merchant_reference=8323370e-3651-46e3-9d56-16996ed72992
+Payment successfully initiated; merchant_reference=8323370e-3651-46e3-9d56-16996ed72992
+"POST /api/program-payments/initiate/16/ HTTP/1.1" 200 306
+"GET /admin/api/programregistration/ HTTP/1.1" 200 31664
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/programpayment/ HTTP/1.1" 200 36950
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/programpayment/fa94924b-7b80-4e9a-8d4d-f314a197b2b1/change/ HTTP/1.1" 200 42402
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/programpayment/fa94924b-7b80-4e9a-8d4d-f314a197b2b1/change/ HTTP/1.1" 200 42402
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/programpayment/fa94924b-7b80-4e9a-8d4d-f314a197b2b1/change/ HTTP/1.1" 200 42402
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/programpayment/fa94924b-7b80-4e9a-8d4d-f314a197b2b1/change/ HTTP/1.1" 200 42402
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/programpayment/fa94924b-7b80-4e9a-8d4d-f314a197b2b1/change/ HTTP/1.1" 200 42402
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/programpayment/ HTTP/1.1" 200 36950
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/eventregistration/ HTTP/1.1" 200 31622
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/programregistration/ HTTP/1.1" 200 31664
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/programpayment/ HTTP/1.1" 200 36950
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/programpayment/fa94924b-7b80-4e9a-8d4d-f314a197b2b1/change/ HTTP/1.1" 200 42402
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET //api/testimonials/ HTTP/1.1" 200 2
+Watching for file changes with StatReloader
+"GET /admin/ HTTP/1.1" 200 50596
+"GET /admin/api/programpayment/ HTTP/1.1" 200 34553
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/programpayment/fa94924b-7b80-4e9a-8d4d-f314a197b2b1/change/ HTTP/1.1" 200 43557
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\services\program_payment_service.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\services\program_payment_service.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\services\program_payment_service.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /admin/api/programpayment/fa94924b-7b80-4e9a-8d4d-f314a197b2b1/change/ HTTP/1.1" 200 43557
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\services\program_payment_service.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\services\program_payment_service.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\services\program_payment_service.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\services\program_payment_service.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\mbg_backend\settings.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\mbg_backend\settings.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /admin/ HTTP/1.1" 200 50615
+"GET /admin/api/programpayment/ HTTP/1.1" 200 34553
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/programpayment/fa94924b-7b80-4e9a-8d4d-f314a197b2b1/change/ HTTP/1.1" 200 43557
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\services\program_payment_service.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET /admin/api/programpayment/fa94924b-7b80-4e9a-8d4d-f314a197b2b1/change/ HTTP/1.1" 200 43557
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/programpayment/fa94924b-7b80-4e9a-8d4d-f314a197b2b1/change/ HTTP/1.1" 200 43557
+"GET /admin/api/payment/ HTTP/1.1" 200 33488
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/payment/ec40a2af-5da9-43b2-90bf-618d799ca3a1/change/ HTTP/1.1" 200 43500
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/payment/ec40a2af-5da9-43b2-90bf-618d799ca3a1/change/ HTTP/1.1" 200 43500
+"GET /admin/api/payment/ HTTP/1.1" 200 33488
+"GET /admin/api/payment/7b08a546-cb1b-41c5-9f43-02a8e8255bab/change/ HTTP/1.1" 200 43532
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+OrderTrackingId: 4443ec71-67cb-4278-8781-db196bbd8793
+OrderMerchantReference: 66a73fc2-fcd1-4693-8d47-a437b1e4b0fe
+Current payment status: completed
+Current registration status: confirmed
+Requesting Pesapal access token.
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Auth/RequestToken HTTP/1.1" 200 564
+Pesapal token response status=200
+Obtained Pesapal access token (cached ttl=300)
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=4443ec71-67cb-4278-8781-db196bbd8793 HTTP/1.1" 200 704
+  - Status Code: 1 (type: <class 'int'>)
+  - Payment Method: MpesaKE
+  - Transaction ID: None
+  - Status Description: Completed
+"GET /api/payments/pesapal-callback/?OrderTrackingId=4443ec71-67cb-4278-8781-db196bbd8793&OrderMerchantReference=66a73fc2-fcd1-4693-8d47-a437b1e4b0fe HTTP/1.1" 302 0
+"GET //api/testimonials/ HTTP/1.1" 200 2
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\services\program_payment_service.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /admin/ HTTP/1.1" 200 50617
+"GET /admin/api/programpayment/ HTTP/1.1" 200 34553
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/programpayment/fa94924b-7b80-4e9a-8d4d-f314a197b2b1/change/ HTTP/1.1" 200 43557
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /admin/api/programpayment/fa94924b-7b80-4e9a-8d4d-f314a197b2b1/change/ HTTP/1.1" 200 43557
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\urls.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /admin/api/programpayment/fa94924b-7b80-4e9a-8d4d-f314a197b2b1/change/ HTTP/1.1" 200 43557
+"GET /admin/api/programregistration/ HTTP/1.1" 200 31664
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"POST /admin/api/programregistration/ HTTP/1.1" 200 23469
+"POST /admin/api/programregistration/ HTTP/1.1" 302 0
+"GET /admin/api/programregistration/ HTTP/1.1" 200 31486
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET //api/testimonials/ HTTP/1.1" 200 2
+"GET //api/program/list/ HTTP/1.1" 200 235
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"OPTIONS //api/program/BVROW0/register/ HTTP/1.1" 200 0
+"POST //api/program/BVROW0/register/ HTTP/1.1" 201 194
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET /admin/api/programpayment/ HTTP/1.1" 200 33604
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/programpayment/ HTTP/1.1" 200 33604
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET /admin/api/programregistration/ HTTP/1.1" 200 31666
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/programregistration/17/change/ HTTP/1.1" 200 34433
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Submitting order to Pesapal for payment id=3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a
+Requesting Pesapal access token.
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Auth/RequestToken HTTP/1.1" 200 564
+Pesapal token response status=200
+Obtained Pesapal access token (cached ttl=300)
+Registering IPN with Pesapal (not logging the ipn url).
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/URLSetup/RegisterIPN HTTP/1.1" 200 316
+Pesapal IPN register status=200
+Pesapal IPN registered and cached (ipn_id present).
+Sending SubmitOrderRequest to Pesapal (not logging full payload).
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Transactions/SubmitOrderRequest HTTP/1.1" 200 279
+Pesapal order submission status=200
+Payment updated: tracking_id=7739367d-28aa-4380-9e8d-db19de73c4bb merchant_reference=81657e43-b101-4fc8-a412-52be4e49d00c
+Payment successfully initiated; merchant_reference=81657e43-b101-4fc8-a412-52be4e49d00c
+"POST /api/program-payments/initiate/17/ HTTP/1.1" 200 306
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=7739367d-28aa-4380-9e8d-db19de73c4bb HTTP/1.1" 200 702
+"GET /api/payments/pesapal-callback/?OrderTrackingId=7739367d-28aa-4380-9e8d-db19de73c4bb&OrderMerchantReference=81657e43-b101-4fc8-a412-52be4e49d00c HTTP/1.1" 302 0
+"GET /admin/api/programregistration/17/change/ HTTP/1.1" 200 34441
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/programpayment/ HTTP/1.1" 200 34548
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/testimonials/ HTTP/1.1" 200 2
+"GET //api/program/list/ HTTP/1.1" 200 235
+"GET /api/get-csrf-token/ HTTP/1.1" 200 30
+"GET /api/events/ HTTP/1.1" 200 1981
+"GET /api/get-csrf-token/ HTTP/1.1" 200 30
+"GET /api/events/PUVNE6/ HTTP/1.1" 200 1979
+"GET //api/team/ HTTP/1.1" 200 2
+"GET /api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/program/list/ HTTP/1.1" 200 235
+"GET //api/program/list/ HTTP/1.1" 200 235
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Submitting order to Pesapal for payment id=3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a
+Requesting Pesapal access token.
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Auth/RequestToken HTTP/1.1" 200 564
+Pesapal token response status=200
+Obtained Pesapal access token (cached ttl=300)
+Sending SubmitOrderRequest to Pesapal (not logging full payload).
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Transactions/SubmitOrderRequest HTTP/1.1" 200 279
+Pesapal order submission status=200
+Payment updated: tracking_id=02ae92cf-9f09-4700-9884-db19488cb1cd merchant_reference=d9859114-64d9-433d-b302-24b38ad74bc6
+Payment successfully initiated; merchant_reference=d9859114-64d9-433d-b302-24b38ad74bc6
+"POST /api/program-payments/initiate/17/ HTTP/1.1" 200 306
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"OPTIONS //api/program-payments/initiate/17/ HTTP/1.1" 200 0
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Submitting order to Pesapal for payment id=3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a
+Requesting Pesapal access token.
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Auth/RequestToken HTTP/1.1" 200 564
+Pesapal token response status=200
+Obtained Pesapal access token (cached ttl=300)
+Sending SubmitOrderRequest to Pesapal (not logging full payload).
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Transactions/SubmitOrderRequest HTTP/1.1" 200 279
+Pesapal order submission status=200
+Payment updated: tracking_id=8bb84a3d-6772-4df8-9338-db1914260cfc merchant_reference=d0015d8e-ccb5-4526-978b-d9b81e0ca38f
+Payment successfully initiated; merchant_reference=d0015d8e-ccb5-4526-978b-d9b81e0ca38f
+"POST //api/program-payments/initiate/17/ HTTP/1.1" 200 306
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Submitting order to Pesapal for payment id=3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a
+Sending SubmitOrderRequest to Pesapal (not logging full payload).
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=8bb84a3d-6772-4df8-9338-db1914260cfc HTTP/1.1" 200 901
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1596
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Transactions/SubmitOrderRequest HTTP/1.1" 200 279
+Pesapal order submission status=200
+Payment updated: tracking_id=180b25d0-3364-4908-a6ff-db19ea8f09d0 merchant_reference=5e1ee983-c534-467e-964d-09263af18a4d
+Payment successfully initiated; merchant_reference=5e1ee983-c534-467e-964d-09263af18a4d
+"POST //api/program-payments/initiate/17/ HTTP/1.1" 200 306
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=180b25d0-3364-4908-a6ff-db19ea8f09d0 HTTP/1.1" 200 900
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1595
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=180b25d0-3364-4908-a6ff-db19ea8f09d0 HTTP/1.1" 200 900
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1595
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=180b25d0-3364-4908-a6ff-db19ea8f09d0 HTTP/1.1" 200 900
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1595
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=180b25d0-3364-4908-a6ff-db19ea8f09d0 HTTP/1.1" 200 900
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1595
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=180b25d0-3364-4908-a6ff-db19ea8f09d0 HTTP/1.1" 200 900
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1595
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=180b25d0-3364-4908-a6ff-db19ea8f09d0 HTTP/1.1" 200 900
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1595
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=180b25d0-3364-4908-a6ff-db19ea8f09d0 HTTP/1.1" 200 900
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1595
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=180b25d0-3364-4908-a6ff-db19ea8f09d0 HTTP/1.1" 200 900
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1595
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=180b25d0-3364-4908-a6ff-db19ea8f09d0 HTTP/1.1" 200 900
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1595
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=180b25d0-3364-4908-a6ff-db19ea8f09d0 HTTP/1.1" 200 900
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1595
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=180b25d0-3364-4908-a6ff-db19ea8f09d0 HTTP/1.1" 200 900
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1595
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=180b25d0-3364-4908-a6ff-db19ea8f09d0 HTTP/1.1" 200 900
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1595
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=180b25d0-3364-4908-a6ff-db19ea8f09d0 HTTP/1.1" 200 900
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1595
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=180b25d0-3364-4908-a6ff-db19ea8f09d0 HTTP/1.1" 200 900
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1595
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=180b25d0-3364-4908-a6ff-db19ea8f09d0 HTTP/1.1" 200 900
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1595
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=180b25d0-3364-4908-a6ff-db19ea8f09d0 HTTP/1.1" 200 900
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1595
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=180b25d0-3364-4908-a6ff-db19ea8f09d0 HTTP/1.1" 200 900
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1595
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=180b25d0-3364-4908-a6ff-db19ea8f09d0 HTTP/1.1" 200 900
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1595
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=180b25d0-3364-4908-a6ff-db19ea8f09d0 HTTP/1.1" 200 900
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1595
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=180b25d0-3364-4908-a6ff-db19ea8f09d0 HTTP/1.1" 200 900
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1595
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=180b25d0-3364-4908-a6ff-db19ea8f09d0 HTTP/1.1" 200 900
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1595
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=180b25d0-3364-4908-a6ff-db19ea8f09d0 HTTP/1.1" 200 900
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1595
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=180b25d0-3364-4908-a6ff-db19ea8f09d0 HTTP/1.1" 200 900
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1595
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Requesting Pesapal access token.
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Auth/RequestToken HTTP/1.1" 200 564
+Pesapal token response status=200
+Obtained Pesapal access token (cached ttl=300)
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=180b25d0-3364-4908-a6ff-db19ea8f09d0 HTTP/1.1" 200 900
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1595
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=180b25d0-3364-4908-a6ff-db19ea8f09d0 HTTP/1.1" 200 900
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1595
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=180b25d0-3364-4908-a6ff-db19ea8f09d0 HTTP/1.1" 200 900
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1595
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=180b25d0-3364-4908-a6ff-db19ea8f09d0 HTTP/1.1" 200 900
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1595
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=180b25d0-3364-4908-a6ff-db19ea8f09d0 HTTP/1.1" 200 900
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1595
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=180b25d0-3364-4908-a6ff-db19ea8f09d0 HTTP/1.1" 200 900
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1595
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=180b25d0-3364-4908-a6ff-db19ea8f09d0 HTTP/1.1" 200 900
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1595
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=180b25d0-3364-4908-a6ff-db19ea8f09d0 HTTP/1.1" 200 900
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1595
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=180b25d0-3364-4908-a6ff-db19ea8f09d0 HTTP/1.1" 200 900
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1595
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=180b25d0-3364-4908-a6ff-db19ea8f09d0 HTTP/1.1" 200 900
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1595
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=180b25d0-3364-4908-a6ff-db19ea8f09d0 HTTP/1.1" 200 900
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1595
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Submitting order to Pesapal for payment id=3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a
+Sending SubmitOrderRequest to Pesapal (not logging full payload).
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Transactions/SubmitOrderRequest HTTP/1.1" 200 279
+Pesapal order submission status=200
+Payment updated: tracking_id=ac306d8c-e8a7-44e6-8550-db197f8608c2 merchant_reference=50c59e9a-4843-4ef0-b0c6-139a9aa3e107
+Payment successfully initiated; merchant_reference=50c59e9a-4843-4ef0-b0c6-139a9aa3e107
+"POST //api/program-payments/initiate/17/ HTTP/1.1" 200 306
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=ac306d8c-e8a7-44e6-8550-db197f8608c2 HTTP/1.1" 200 901
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1596
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=ac306d8c-e8a7-44e6-8550-db197f8608c2 HTTP/1.1" 200 901
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1596
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=ac306d8c-e8a7-44e6-8550-db197f8608c2 HTTP/1.1" 200 901
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1596
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=ac306d8c-e8a7-44e6-8550-db197f8608c2 HTTP/1.1" 200 901
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1596
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=ac306d8c-e8a7-44e6-8550-db197f8608c2 HTTP/1.1" 200 901
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1596
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=ac306d8c-e8a7-44e6-8550-db197f8608c2 HTTP/1.1" 200 901
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1596
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=ac306d8c-e8a7-44e6-8550-db197f8608c2 HTTP/1.1" 200 901
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1596
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=ac306d8c-e8a7-44e6-8550-db197f8608c2 HTTP/1.1" 200 901
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1596
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=ac306d8c-e8a7-44e6-8550-db197f8608c2 HTTP/1.1" 200 901
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1596
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=ac306d8c-e8a7-44e6-8550-db197f8608c2 HTTP/1.1" 200 901
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1596
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=ac306d8c-e8a7-44e6-8550-db197f8608c2 HTTP/1.1" 200 901
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1596
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=ac306d8c-e8a7-44e6-8550-db197f8608c2 HTTP/1.1" 200 901
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1596
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=ac306d8c-e8a7-44e6-8550-db197f8608c2 HTTP/1.1" 200 901
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1596
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=ac306d8c-e8a7-44e6-8550-db197f8608c2 HTTP/1.1" 200 901
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1596
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=ac306d8c-e8a7-44e6-8550-db197f8608c2 HTTP/1.1" 200 901
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1596
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=ac306d8c-e8a7-44e6-8550-db197f8608c2 HTTP/1.1" 200 901
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1596
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=ac306d8c-e8a7-44e6-8550-db197f8608c2 HTTP/1.1" 200 901
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1596
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=ac306d8c-e8a7-44e6-8550-db197f8608c2 HTTP/1.1" 200 901
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1596
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=ac306d8c-e8a7-44e6-8550-db197f8608c2 HTTP/1.1" 200 901
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1596
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Submitting order to Pesapal for payment id=3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a
+Sending SubmitOrderRequest to Pesapal (not logging full payload).
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Transactions/SubmitOrderRequest HTTP/1.1" 200 279
+Pesapal order submission status=200
+Payment updated: tracking_id=3558009e-ae50-41c3-b2b5-db193c617fdc merchant_reference=a1050bc5-348c-4ab8-858f-9e6c236898c7
+Payment successfully initiated; merchant_reference=a1050bc5-348c-4ab8-858f-9e6c236898c7
+"POST //api/program-payments/initiate/17/ HTTP/1.1" 200 306
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET /admin/api/programpayment/c4caca15-8128-415a-bca4-29e952e0de0a/change/ HTTP/1.1" 200 43575
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Requesting Pesapal access token.
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Auth/RequestToken HTTP/1.1" 200 564
+Pesapal token response status=200
+Obtained Pesapal access token (cached ttl=300)
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=3558009e-ae50-41c3-b2b5-db193c617fdc HTTP/1.1" 200 712
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1408
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=3558009e-ae50-41c3-b2b5-db193c617fdc HTTP/1.1" 200 712
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1408
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=3558009e-ae50-41c3-b2b5-db193c617fdc HTTP/1.1" 200 712
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1408
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=3558009e-ae50-41c3-b2b5-db193c617fdc HTTP/1.1" 200 712
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1408
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=3558009e-ae50-41c3-b2b5-db193c617fdc HTTP/1.1" 200 712
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1408
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=3558009e-ae50-41c3-b2b5-db193c617fdc HTTP/1.1" 200 712
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1408
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=3558009e-ae50-41c3-b2b5-db193c617fdc HTTP/1.1" 200 712
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1408
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=3558009e-ae50-41c3-b2b5-db193c617fdc HTTP/1.1" 200 712
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1408
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=3558009e-ae50-41c3-b2b5-db193c617fdc HTTP/1.1" 200 712
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1408
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=3558009e-ae50-41c3-b2b5-db193c617fdc HTTP/1.1" 200 712
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1408
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=3558009e-ae50-41c3-b2b5-db193c617fdc HTTP/1.1" 200 712
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1408
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=3558009e-ae50-41c3-b2b5-db193c617fdc HTTP/1.1" 200 712
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1408
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=3558009e-ae50-41c3-b2b5-db193c617fdc HTTP/1.1" 200 712
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1408
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=3558009e-ae50-41c3-b2b5-db193c617fdc HTTP/1.1" 200 712
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1408
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=3558009e-ae50-41c3-b2b5-db193c617fdc HTTP/1.1" 200 712
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1408
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=3558009e-ae50-41c3-b2b5-db193c617fdc HTTP/1.1" 200 712
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1408
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=3558009e-ae50-41c3-b2b5-db193c617fdc HTTP/1.1" 200 712
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1408
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=3558009e-ae50-41c3-b2b5-db193c617fdc HTTP/1.1" 200 712
+- Broken pipe from ('127.0.0.1', 62775)
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=3558009e-ae50-41c3-b2b5-db193c617fdc HTTP/1.1" 200 712
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1408
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=3558009e-ae50-41c3-b2b5-db193c617fdc HTTP/1.1" 200 712
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1408
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=3558009e-ae50-41c3-b2b5-db193c617fdc HTTP/1.1" 200 712
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1408
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=3558009e-ae50-41c3-b2b5-db193c617fdc HTTP/1.1" 200 712
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1408
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=3558009e-ae50-41c3-b2b5-db193c617fdc HTTP/1.1" 200 712
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1408
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=3558009e-ae50-41c3-b2b5-db193c617fdc HTTP/1.1" 200 712
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1408
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=3558009e-ae50-41c3-b2b5-db193c617fdc HTTP/1.1" 200 712
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1408
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=3558009e-ae50-41c3-b2b5-db193c617fdc HTTP/1.1" 200 712
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1408
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=3558009e-ae50-41c3-b2b5-db193c617fdc HTTP/1.1" 200 712
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1408
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=3558009e-ae50-41c3-b2b5-db193c617fdc HTTP/1.1" 200 712
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1408
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Submitting order to Pesapal for payment id=3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a
+Sending SubmitOrderRequest to Pesapal (not logging full payload).
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Transactions/SubmitOrderRequest HTTP/1.1" 200 279
+Pesapal order submission status=200
+Payment updated: tracking_id=ac9fe56f-d43b-43e1-aef2-db19615b273a merchant_reference=17ecd96b-1894-4fb0-86d4-214605bb5e0d
+Payment successfully initiated; merchant_reference=17ecd96b-1894-4fb0-86d4-214605bb5e0d
+"POST //api/program-payments/initiate/17/ HTTP/1.1" 200 306
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=ac9fe56f-d43b-43e1-aef2-db19615b273a HTTP/1.1" 200 901
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1596
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=ac9fe56f-d43b-43e1-aef2-db19615b273a HTTP/1.1" 200 901
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1596
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=ac9fe56f-d43b-43e1-aef2-db19615b273a HTTP/1.1" 200 901
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1596
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=ac9fe56f-d43b-43e1-aef2-db19615b273a HTTP/1.1" 200 901
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1596
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=ac9fe56f-d43b-43e1-aef2-db19615b273a HTTP/1.1" 200 901
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1596
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=ac9fe56f-d43b-43e1-aef2-db19615b273a HTTP/1.1" 200 901
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1596
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=ac9fe56f-d43b-43e1-aef2-db19615b273a HTTP/1.1" 200 901
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1596
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=ac9fe56f-d43b-43e1-aef2-db19615b273a HTTP/1.1" 200 901
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1596
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=ac9fe56f-d43b-43e1-aef2-db19615b273a HTTP/1.1" 200 901
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1596
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+Not Found: /
+"GET / HTTP/1.1" 404 3192
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3243
+"GET /admin/ HTTP/1.1" 200 50627
+"GET /admin/api/programpayment/ HTTP/1.1" 200 34547
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/programpayment/ HTTP/1.1" 200 34547
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/programpayment/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/change/ HTTP/1.1" 200 43585
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Requesting Pesapal access token.
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Auth/RequestToken HTTP/1.1" 200 564
+Pesapal token response status=200
+Obtained Pesapal access token (cached ttl=300)
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=ac9fe56f-d43b-43e1-aef2-db19615b273a HTTP/1.1" 200 704
+"GET /api/payments/pesapal-callback/?OrderTrackingId=ac9fe56f-d43b-43e1-aef2-db19615b273a&OrderMerchantReference=17ecd96b-1894-4fb0-86d4-214605bb5e0d HTTP/1.1" 302 0
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET /admin/ HTTP/1.1" 200 50625
+"GET /admin/api/programpayment/ HTTP/1.1" 200 34548
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/programpayment/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/change/ HTTP/1.1" 200 43585
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Requesting Pesapal access token.
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Auth/RequestToken HTTP/1.1" 200 564
+Pesapal token response status=200
+Obtained Pesapal access token (cached ttl=300)
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=ac9fe56f-d43b-43e1-aef2-db19615b273a HTTP/1.1" 200 704
+"GET /api/payments/pesapal-callback/?OrderTrackingId=ac9fe56f-d43b-43e1-aef2-db19615b273a&OrderMerchantReference=17ecd96b-1894-4fb0-86d4-214605bb5e0d HTTP/1.1" 302 0
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/program/list/ HTTP/1.1" 200 235
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"OPTIONS //api/program/BVROW0/register/ HTTP/1.1" 200 0
+"POST //api/program/BVROW0/register/ HTTP/1.1" 201 194
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Submitting order to Pesapal for payment id=3ad6269a-c0e5-46b7-bd87-1476a4313c84
+Sending SubmitOrderRequest to Pesapal (not logging full payload).
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Transactions/SubmitOrderRequest HTTP/1.1" 200 279
+Pesapal order submission status=200
+Payment updated: tracking_id=dc527b9d-4178-4705-ac23-db1949af1ab0 merchant_reference=6f67e189-c7a1-4165-8488-959af31c6b96
+Payment successfully initiated; merchant_reference=6f67e189-c7a1-4165-8488-959af31c6b96
+"POST /api/program-payments/initiate/18/ HTTP/1.1" 200 306
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/testimonials/ HTTP/1.1" 200 2
+"GET /admin/ HTTP/1.1" 200 50625
+"GET /admin/api/programpayment/ HTTP/1.1" 200 35492
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/programpayment/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/change/ HTTP/1.1" 200 43585
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Requesting Pesapal access token.
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Auth/RequestToken HTTP/1.1" 200 564
+Pesapal token response status=200
+Obtained Pesapal access token (cached ttl=300)
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=ac9fe56f-d43b-43e1-aef2-db19615b273a HTTP/1.1" 200 704
+"GET /api/payments/pesapal-callback/?OrderTrackingId=ac9fe56f-d43b-43e1-aef2-db19615b273a&OrderMerchantReference=17ecd96b-1894-4fb0-86d4-214605bb5e0d HTTP/1.1" 302 0
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Submitting order to Pesapal for payment id=3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a
+Sending SubmitOrderRequest to Pesapal (not logging full payload).
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Transactions/SubmitOrderRequest HTTP/1.1" 200 279
+Pesapal order submission status=200
+Payment updated: tracking_id=448ad878-aa3f-4339-9c1f-db19706782ac merchant_reference=10aae012-9f4f-4d45-bb01-47a4f285281f
+Payment successfully initiated; merchant_reference=10aae012-9f4f-4d45-bb01-47a4f285281f
+"POST //api/program-payments/initiate/17/ HTTP/1.1" 200 306
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=448ad878-aa3f-4339-9c1f-db19706782ac HTTP/1.1" 200 901
+- Broken pipe from ('127.0.0.1', 57293)
+"GET /api/payments/pesapal-callback/?OrderTrackingId=ac9fe56f-d43b-43e1-aef2-db19615b273a&OrderMerchantReference=17ecd96b-1894-4fb0-86d4-214605bb5e0d HTTP/1.1" 302 0
+"GET /api/get-csrf-token/ HTTP/1.1" 200 30
+"GET /api/events/ HTTP/1.1" 200 1981
+"GET /api/payments/pesapal-callback/?OrderTrackingId=ac9fe56f-d43b-43e1-aef2-db19615b273a&OrderMerchantReference=17ecd96b-1894-4fb0-86d4-214605bb5e0d HTTP/1.1" 302 0
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /api/payments/pesapal-callback/?OrderTrackingId=ac9fe56f-d43b-43e1-aef2-db19615b273a&OrderMerchantReference=17ecd96b-1894-4fb0-86d4-214605bb5e0d HTTP/1.1" 302 0
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /
+"GET / HTTP/1.1" 404 3192
+"GET /admin/ HTTP/1.1" 200 50627
+"GET /admin/api/programpayment/ HTTP/1.1" 200 35491
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/programpayment/ HTTP/1.1" 200 35491
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/programregistration/ HTTP/1.1" 200 32353
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /static/admin/img/icon-yes.svg HTTP/1.1" 200 436
+"GET /admin/api/programregistration/17/change/ HTTP/1.1" 200 34441
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/programpayment/ HTTP/1.1" 200 35491
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/programpayment/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/change/ HTTP/1.1" 200 43585
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"POST /admin/api/programpayment/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/change/ HTTP/1.1" 200 43959
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"POST /admin/api/programpayment/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/change/ HTTP/1.1" 302 0
+"GET /admin/api/programpayment/ HTTP/1.1" 200 36165
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/programpayment/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/change/ HTTP/1.1" 200 43591
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Requesting Pesapal access token.
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Auth/RequestToken HTTP/1.1" 200 563
+Pesapal token response status=200
+Obtained Pesapal access token (cached ttl=300)
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=448ad878-aa3f-4339-9c1f-db19706782ac HTTP/1.1" 200 704
+"GET /api/payments/pesapal-callback/?OrderTrackingId=448ad878-aa3f-4339-9c1f-db19706782ac&OrderMerchantReference=10aae012-9f4f-4d45-bb01-47a4f285281f HTTP/1.1" 302 0
+"GET //api/testimonials/ HTTP/1.1" 200 2
+"GET /api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/team/ HTTP/1.1" 200 2
+"GET //api/program/list/ HTTP/1.1" 200 235
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"OPTIONS //api/program/BVROW0/register/ HTTP/1.1" 200 0
+"POST //api/program/BVROW0/register/ HTTP/1.1" 201 194
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"OPTIONS //api/program-payments/initiate/19/ HTTP/1.1" 200 0
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Submitting order to Pesapal for payment id=a7a94391-dd26-4980-83db-f14052d505bc
+Registering IPN with Pesapal (not logging the ipn url).
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/URLSetup/RegisterIPN HTTP/1.1" 200 316
+Pesapal IPN register status=200
+Pesapal IPN registered and cached (ipn_id present).
+Sending SubmitOrderRequest to Pesapal (not logging full payload).
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Transactions/SubmitOrderRequest HTTP/1.1" 200 279
+Pesapal order submission status=200
+Payment updated: tracking_id=76abe992-a968-4f91-9e9d-db19bd797faf merchant_reference=1585d2f3-5605-48cb-907a-27b0dba62be0
+Payment successfully initiated; merchant_reference=1585d2f3-5605-48cb-907a-27b0dba62be0
+"POST //api/program-payments/initiate/19/ HTTP/1.1" 200 306
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=76abe992-a968-4f91-9e9d-db19bd797faf HTTP/1.1" 200 703
+"GET /api/payments/pesapal-callback/?OrderTrackingId=76abe992-a968-4f91-9e9d-db19bd797faf&OrderMerchantReference=1585d2f3-5605-48cb-907a-27b0dba62be0 HTTP/1.1" 302 0
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Requesting Pesapal access token.
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Auth/RequestToken HTTP/1.1" 200 564
+Pesapal token response status=200
+Obtained Pesapal access token (cached ttl=300)
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=76abe992-a968-4f91-9e9d-db19bd797faf HTTP/1.1" 200 703
+"GET /api/payments/pesapal-callback/?OrderTrackingId=76abe992-a968-4f91-9e9d-db19bd797faf&OrderMerchantReference=1585d2f3-5605-48cb-907a-27b0dba62be0 HTTP/1.1" 302 0
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Requesting Pesapal access token.
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Auth/RequestToken HTTP/1.1" 200 564
+Pesapal token response status=200
+Obtained Pesapal access token (cached ttl=300)
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=448ad878-aa3f-4339-9c1f-db19706782ac HTTP/1.1" 200 704
+"GET /api/payments/pesapal-callback/?OrderTrackingId=448ad878-aa3f-4339-9c1f-db19706782ac&OrderMerchantReference=10aae012-9f4f-4d45-bb01-47a4f285281f HTTP/1.1" 302 0
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Submitting order to Pesapal for payment id=3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a
+Sending SubmitOrderRequest to Pesapal (not logging full payload).
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Transactions/SubmitOrderRequest HTTP/1.1" 200 279
+Pesapal order submission status=200
+Payment updated: tracking_id=655616f8-0376-41d2-a990-db19ff6d457d merchant_reference=f5d351b2-793f-4517-a676-00fa8630d64d
+Payment successfully initiated; merchant_reference=f5d351b2-793f-4517-a676-00fa8630d64d
+"POST //api/program-payments/initiate/17/ HTTP/1.1" 200 306
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=655616f8-0376-41d2-a990-db19ff6d457d HTTP/1.1" 200 900
+- Broken pipe from ('127.0.0.1', 64152)
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=76abe992-a968-4f91-9e9d-db19bd797faf HTTP/1.1" 200 703
+"GET /api/payments/pesapal-callback/?OrderTrackingId=76abe992-a968-4f91-9e9d-db19bd797faf&OrderMerchantReference=1585d2f3-5605-48cb-907a-27b0dba62be0 HTTP/1.1" 302 0
+"GET /admin/ HTTP/1.1" 200 51419
+"GET /admin/api/programregistration/ HTTP/1.1" 200 33037
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/programpayment/ HTTP/1.1" 200 36427
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/programpayment/a7a94391-dd26-4980-83db-f14052d505bc/change/ HTTP/1.1" 200 43562
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=76abe992-a968-4f91-9e9d-db19bd797faf HTTP/1.1" 200 703
+"GET /api/payments/pesapal-callback/?OrderTrackingId=76abe992-a968-4f91-9e9d-db19bd797faf&OrderMerchantReference=1585d2f3-5605-48cb-907a-27b0dba62be0 HTTP/1.1" 302 0
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Requesting Pesapal access token.
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+Incremented Retry for (url='/pesapalv3/api/Auth/RequestToken'): Retry(total=2, connect=None, read=None, redirect=None, status=None)
+Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000150BC658320>: Failed to resolve 'cybqa.pesapal.com' ([Errno 11001] getaddrinfo failed)")': /pesapalv3/api/Auth/RequestToken
+Starting new HTTPS connection (2): cybqa.pesapal.com:443
+Incremented Retry for (url='/pesapalv3/api/Auth/RequestToken'): Retry(total=1, connect=None, read=None, redirect=None, status=None)
+Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000150BC2F67E0>: Failed to resolve 'cybqa.pesapal.com' ([Errno 11001] getaddrinfo failed)")': /pesapalv3/api/Auth/RequestToken
+Starting new HTTPS connection (3): cybqa.pesapal.com:443
+Incremented Retry for (url='/pesapalv3/api/Auth/RequestToken'): Retry(total=0, connect=None, read=None, redirect=None, status=None)
+Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000150BC7770B0>: Failed to resolve 'cybqa.pesapal.com' ([Errno 11001] getaddrinfo failed)")': /pesapalv3/api/Auth/RequestToken
+Starting new HTTPS connection (4): cybqa.pesapal.com:443
+Connection error requesting Pesapal token.
+No access token for get_transaction_status
+"GET /api/payments/pesapal-callback/?OrderTrackingId=76abe992-a968-4f91-9e9d-db19bd797faf&OrderMerchantReference=1585d2f3-5605-48cb-907a-27b0dba62be0 HTTP/1.1" 302 0
+"GET //api/program/list/ HTTP/1.1" 200 235
+"GET //api/testimonials/ HTTP/1.1" 200 2
+"GET //api/team/ HTTP/1.1" 200 2
+"GET /api/get-csrf-token/ HTTP/1.1" 200 30
+"GET /api/events/ HTTP/1.1" 200 1981
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Requesting Pesapal access token.
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Submitting order to Pesapal for payment id=3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a
+Requesting Pesapal access token.
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Auth/RequestToken HTTP/1.1" 200 562
+Pesapal token response status=200
+Obtained Pesapal access token (cached ttl=300)
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Auth/RequestToken HTTP/1.1" 200 564
+Pesapal token response status=200
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=655616f8-0376-41d2-a990-db19ff6d457d HTTP/1.1" 200 900
+Obtained Pesapal access token (cached ttl=300)
+Registering IPN with Pesapal (not logging the ipn url).
+"GET //api/program-payments/status/3b6c810f-4a25-47db-9cfc-b5e6ef4eac0a/ HTTP/1.1" 200 1595
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/URLSetup/RegisterIPN HTTP/1.1" 200 316
+Pesapal IPN register status=200
+Pesapal IPN registered and cached (ipn_id present).
+Sending SubmitOrderRequest to Pesapal (not logging full payload).
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Transactions/SubmitOrderRequest HTTP/1.1" 200 279
+Pesapal order submission status=200
+Payment updated: tracking_id=db5c8fdb-af7d-4052-8d56-db19422da269 merchant_reference=8e7d294c-17d8-43b4-beed-9201cf72adef
+Payment successfully initiated; merchant_reference=8e7d294c-17d8-43b4-beed-9201cf72adef
+"POST //api/program-payments/initiate/17/ HTTP/1.1" 200 306
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=db5c8fdb-af7d-4052-8d56-db19422da269 HTTP/1.1" 200 900
+- Broken pipe from ('127.0.0.1', 64420)
+"GET /admin/ HTTP/1.1" 200 51415
+"GET /admin/api/programpayment/ HTTP/1.1" 200 36427
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/programpayment/a7a94391-dd26-4980-83db-f14052d505bc/change/ HTTP/1.1" 200 43562
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Requesting Pesapal access token.
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Auth/RequestToken HTTP/1.1" 200 564
+Pesapal token response status=200
+Obtained Pesapal access token (cached ttl=300)
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=76abe992-a968-4f91-9e9d-db19bd797faf HTTP/1.1" 200 703
+"GET /api/payments/pesapal-callback/?OrderTrackingId=76abe992-a968-4f91-9e9d-db19bd797faf&OrderMerchantReference=1585d2f3-5605-48cb-907a-27b0dba62be0 HTTP/1.1" 302 0
+"GET //api/testimonials/ HTTP/1.1" 200 2
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /admin/ HTTP/1.1" 200 51427
+"GET /admin/account/emailaddress/ HTTP/1.1" 200 24790
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/programpayment/ HTTP/1.1" 200 36427
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/programregistration/ HTTP/1.1" 200 33037
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"POST /admin/api/programregistration/ HTTP/1.1" 200 24748
+"POST /admin/api/programregistration/ HTTP/1.1" 302 0
+"GET /admin/api/programregistration/ HTTP/1.1" 200 30762
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"POST //api/program/BVROW0/register/ HTTP/1.1" 201 194
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"OPTIONS //api/program-payments/initiate/20/ HTTP/1.1" 200 0
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Submitting order to Pesapal for payment id=ecaab03e-09d7-4fed-b32f-31c4e82c5475
+Requesting Pesapal access token.
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Auth/RequestToken HTTP/1.1" 200 564
+Pesapal token response status=200
+Obtained Pesapal access token (cached ttl=300)
+Registering IPN with Pesapal (not logging the ipn url).
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/URLSetup/RegisterIPN HTTP/1.1" 200 316
+Pesapal IPN register status=200
+Pesapal IPN registered and cached (ipn_id present).
+Sending SubmitOrderRequest to Pesapal (not logging full payload).
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Transactions/SubmitOrderRequest HTTP/1.1" 200 279
+Pesapal order submission status=200
+Payment updated: tracking_id=9fcd6d1b-7d6f-46b5-a862-db19ff57aa0a merchant_reference=3cab81fb-e8d1-4159-a819-1b8de8d9f19d
+Payment successfully initiated; merchant_reference=3cab81fb-e8d1-4159-a819-1b8de8d9f19d
+"POST //api/program-payments/initiate/20/ HTTP/1.1" 200 306
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Requesting Pesapal access token.
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Auth/RequestToken HTTP/1.1" 200 564
+Pesapal token response status=200
+Obtained Pesapal access token (cached ttl=300)
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=9fcd6d1b-7d6f-46b5-a862-db19ff57aa0a HTTP/1.1" 200 704
+"GET /api/payments/pesapal-callback/?OrderTrackingId=9fcd6d1b-7d6f-46b5-a862-db19ff57aa0a&OrderMerchantReference=3cab81fb-e8d1-4159-a819-1b8de8d9f19d HTTP/1.1" 302 0
+"GET //api/testimonials/ HTTP/1.1" 200 2
+"GET /admin/api/programregistration/ HTTP/1.1" 200 30945
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/programpayment/ HTTP/1.1" 200 33579
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/programpayment/ecaab03e-09d7-4fed-b32f-31c4e82c5475/change/ HTTP/1.1" 200 43585
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=9fcd6d1b-7d6f-46b5-a862-db19ff57aa0a HTTP/1.1" 200 704
+"GET /api/payments/pesapal-callback/?OrderTrackingId=9fcd6d1b-7d6f-46b5-a862-db19ff57aa0a&OrderMerchantReference=3cab81fb-e8d1-4159-a819-1b8de8d9f19d HTTP/1.1" 302 0
+C:\Users\User\Desktop\DarajaCloudSpace\backend\mbg_backend\settings.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\mbg_backend\settings.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /api/get-csrf-token/ HTTP/1.1" 200 30
+"GET /api/events/ HTTP/1.1" 200 1981
+"GET /api/get-csrf-token/ HTTP/1.1" 200 30
+"GET /api/events/PUVNE6/ HTTP/1.1" 200 1979
+"GET //api/program/list/ HTTP/1.1" 200 235
+"GET //api/program/list/ HTTP/1.1" 200 235
+"GET /api/get-csrf-token/ HTTP/1.1" 200 30
+"GET /api/events/ HTTP/1.1" 200 1981
+"GET //api/gallery/categories/ HTTP/1.1" 200 2
+"GET /api/get-csrf-token/ HTTP/1.1" 200 30
+"GET /api/events/ HTTP/1.1" 200 1981
+"GET /api/get-csrf-token/ HTTP/1.1" 200 30
+"GET /api/events/PUVNE6/ HTTP/1.1" 200 1979
+"GET //api/program/list/ HTTP/1.1" 200 235
+"GET /api/get-csrf-token/ HTTP/1.1" 200 30
+"GET /api/events/ HTTP/1.1" 200 1981
+"GET /api/get-csrf-token/ HTTP/1.1" 200 30
+"GET /api/events/PUVNE6/ HTTP/1.1" 200 1979
+"GET //api/program/list/ HTTP/1.1" 200 235
+"GET /api/get-csrf-token/ HTTP/1.1" 200 30
+"GET /api/events/ HTTP/1.1" 200 1981
+"GET /api/get-csrf-token/ HTTP/1.1" 200 30
+"GET /api/events/PUVNE6/ HTTP/1.1" 200 1979
+"GET //api/program/list/ HTTP/1.1" 200 235
+"GET /api/get-csrf-token/ HTTP/1.1" 200 30
+"GET /api/events/ HTTP/1.1" 200 1981
+"GET /api/get-csrf-token/ HTTP/1.1" 200 30
+"GET /api/events/PUVNE6/ HTTP/1.1" 200 1979
+"GET //api/program/list/ HTTP/1.1" 200 235
+"GET /api/get-csrf-token/ HTTP/1.1" 200 30
+"GET /api/events/ HTTP/1.1" 200 1981
+"GET /api/get-csrf-token/ HTTP/1.1" 200 30
+"GET /api/events/PUVNE6/ HTTP/1.1" 200 1979
+"GET //api/program/list/ HTTP/1.1" 200 235
+"GET /api/get-csrf-token/ HTTP/1.1" 200 30
+"GET /api/events/ HTTP/1.1" 200 1981
+"GET /api/get-csrf-token/ HTTP/1.1" 200 30
+"GET /api/events/PUVNE6/ HTTP/1.1" 200 1979
+"GET //api/program/list/ HTTP/1.1" 200 235
+"GET /api/get-csrf-token/ HTTP/1.1" 200 30
+"GET /api/events/ HTTP/1.1" 200 1981
+"GET /api/get-csrf-token/ HTTP/1.1" 200 30
+"GET /api/events/PUVNE6/ HTTP/1.1" 200 1979
+"GET //api/program/list/ HTTP/1.1" 200 235
+"GET /api/get-csrf-token/ HTTP/1.1" 200 30
+"GET /api/events/ HTTP/1.1" 200 1981
+"GET /api/get-csrf-token/ HTTP/1.1" 200 30
+"GET /api/events/PUVNE6/ HTTP/1.1" 200 1979
+"GET //api/program/list/ HTTP/1.1" 200 235
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"POST //api/program/BVROW0/register/ HTTP/1.1" 201 194
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"OPTIONS //api/program-payments/initiate/21/ HTTP/1.1" 200 0
+ProgramPaymentService initialized with callback: http://127.0.0.1:8000/api/payments/pesapal-callback/
+Submitting order to Pesapal for payment id=dcfc6995-9d39-4e72-a709-57294c34a0e1
+Requesting Pesapal access token.
+Starting new HTTPS connection (1): pay.pesapal.com:443
+https://pay.pesapal.com:443 "POST /v3/api/Auth/RequestToken HTTP/1.1" 200 None
+Pesapal token response status=200
+Obtained Pesapal access token (cached ttl=300)
+Registering IPN with Pesapal (not logging the ipn url).
+https://pay.pesapal.com:443 "POST /v3/api/URLSetup/RegisterIPN HTTP/1.1" 200 None
+Pesapal IPN register status=200
+Pesapal IPN registered and cached (ipn_id present).
+Sending SubmitOrderRequest to Pesapal (not logging full payload).
+https://pay.pesapal.com:443 "POST /v3/api/Transactions/SubmitOrderRequest HTTP/1.1" 200 None
+Pesapal order submission status=200
+Payment updated: tracking_id=fd2f50e6-b75a-41c6-89c0-db1956b75379 merchant_reference=416cb80f-7a00-4be4-81b6-4dde6bd5fe85
+Payment successfully initiated; merchant_reference=416cb80f-7a00-4be4-81b6-4dde6bd5fe85
+"POST //api/program-payments/initiate/21/ HTTP/1.1" 200 297
+C:\Users\User\Desktop\DarajaCloudSpace\backend\mbg_backend\settings.py changed, reloading.
+Watching for file changes with StatReloader
