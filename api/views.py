@@ -27,6 +27,7 @@ from .serializers import (
     PaymentSerializer, MyTokenObtainPairSerializer
 )
 from .services.pesapal_service import PesaPalService
+from .services.program_payment_service import ProgramPaymentService
 from rest_framework_simplejwt.views import TokenObtainPairView
 from django.http import HttpResponse
 from django.shortcuts import redirect
@@ -254,38 +255,28 @@ def program_list_endpoint(request):
     return Response(serializer.data, status=status.HTTP_200_OK)
 from .models import ProgramPayment
 # views.py
+# views.py - Your existing program registration endpoint
 @api_view(['POST'])
 def program_register_endpoint(request, program_id):
-    """Handle program registration"""
+    """Register for a program and return registration ID for payment"""
     try:
-        # Get the program
-        try:
-            program = Program.objects.get(id=program_id)
-        except Program.DoesNotExist:
-            return Response(
-                {'error': 'Program not found'}, 
-                status=status.HTTP_404_NOT_FOUND
-            )
-
-        # Create registration
+        program = get_object_or_404(Program, id=program_id)
         serializer = ProgramRegistrationSerializer(data=request.data)
+        
         if serializer.is_valid():
+            # Save registration
             registration = serializer.save(program=program)
             
-            # Create program payment record
-            payment = ProgramPayment.objects.create(
-                registration=registration,
-                customer_email=registration.email,
-                customer_phone=registration.phone_number,
-                description=f"Program: {program.title}"
-            )
-            
+            # Return registration ID so frontend can initiate payment
             return Response({
-                'id': str(registration.id),
-                'message': 'Registration successful',
-                'payment_id': str(payment.id)
+                'registration_id': registration.id,
+                'program_title': program.title,
+                'price': program.price,
+                'message': 'Registration successful. Proceed to payment.',
+                'payment_required': True,  # Indicate that payment is needed
+                'next_step': f'/api/program-payments/initiate/{registration.id}/'
             }, status=status.HTTP_201_CREATED)
-        
+            
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
     except Exception as e:
@@ -294,6 +285,7 @@ def program_register_endpoint(request, program_id):
             {'error': f'Registration failed: {str(e)}'},
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
+        
 def send_program_registration_emails(registration):
     context = {
         'full_name': registration.full_name,
@@ -568,39 +560,139 @@ def pesapal_callback(request):
         frontend_base_url = frontend_base_url.rstrip('/')
         frontend_url = f"{frontend_base_url}/payment-result?status=error&message=Callback processing failed"
         return HttpResponseRedirect(frontend_url)
-    
+   
 @api_view(['POST'])
 def pesapal_ipn(request):
-    """Handle PesaPal Instant Payment Notification (IPN)"""
+    """
+    Handle PesaPal Instant Payment Notification (IPN) for BOTH event and program payments
+    """
     try:
         ipn_data = request.data
         order_tracking_id = ipn_data.get('OrderTrackingId')
+        order_notification_type = ipn_data.get('OrderNotificationType')
+        
+        logger.info(f"🔄 PESAPAL IPN RECEIVED - OrderTrackingId: {order_tracking_id}, Type: {order_notification_type}")
+        logger.info(f"📦 Full IPN Data: {ipn_data}")
         
         if not order_tracking_id:
+            logger.error("❌ IPN missing OrderTrackingId")
             return Response({'error': 'Missing order tracking ID'}, status=status.HTTP_400_BAD_REQUEST)
         
-        payment = get_object_or_404(Payment, pesapal_order_tracking_id=order_tracking_id)
-        pesapal = PesaPalService()
+        # Try to find payment in EVENT payments first
+        payment = None
+        payment_type = None
         
+        try:
+            payment = Payment.objects.get(pesapal_order_tracking_id=order_tracking_id)
+            payment_type = 'event'
+            logger.info(f"✅ Found EVENT payment: {payment.id}")
+        except Payment.DoesNotExist:
+            logger.info(f"🔍 Event payment not found for tracking ID: {order_tracking_id}, checking program payments...")
+        
+        # If not found in events, try PROGRAM payments
+        if not payment:
+            try:
+                payment = ProgramPayment.objects.get(pesapal_order_tracking_id=order_tracking_id)
+                payment_type = 'program'
+                logger.info(f"✅ Found PROGRAM payment: {payment.id}")
+            except ProgramPayment.DoesNotExist:
+                logger.error(f"❌ No payment found (event or program) for tracking ID: {order_tracking_id}")
+                return Response(
+                    {'error': 'Payment not found'}, 
+                    status=status.HTTP_404_NOT_FOUND
+                )
+        
+        # Validate the IPN with PesaPal
+        pesapal = PesaPalService()
         validation_response = pesapal.validate_ipn(order_tracking_id)
         
-        if validation_response and validation_response.get('status_code') == '1':
-            payment.payment_status = 'completed'
-            payment.payment_completed_at = timezone.now()
-            payment.pesapal_transaction_id = validation_response.get('transaction_id')
+        logger.info(f"📡 PesaPal validation response: {validation_response}")
+        
+        if validation_response:
+            status_code = validation_response.get('status_code')
+            payment_method = validation_response.get('payment_method')
+            transaction_id = validation_response.get('transaction_id')
             
-            payment.registration.registration_status = 'confirmed'
-            payment.registration.save()
+            logger.info(f"🔄 Processing payment status - Code: {status_code}, Type: {payment_type}")
             
-            payment.save()
-            
-            # Send payment confirmation email
-            send_payment_confirmation_email(payment)
-            
-        return Response({'message': 'IPN processed successfully'})
+            if status_code in [1, '1']:  # COMPLETED
+                payment.payment_status = 'completed'
+                payment.payment_completed_at = timezone.now()
+                payment.payment_method = payment_method or 'pesapal'
+                if transaction_id:
+                    payment.pesapal_transaction_id = transaction_id
+                
+                payment.save()
+                logger.info(f"✅ PAYMENT COMPLETED - {payment_type.upper()}: {payment.id}")
+                
+                # Handle completion based on payment type
+                if payment_type == 'event':
+                    # Confirm event registration
+                    payment.registration.registration_status = 'confirmed'
+                    payment.registration.save()
+                    
+                    # Send event payment confirmation email
+                    try:
+                        send_payment_confirmation_email(payment)
+                        logger.info("✅ Event payment confirmation email sent successfully")
+                    except Exception as email_error:
+                        logger.error(f"❌ Failed to send event payment confirmation email: {str(email_error)}")
+                        
+                elif payment_type == 'program':
+                    # Update program registration payment status
+                    payment.registration.has_paid = True
+                    payment.registration.save()
+                    
+                    # Send program payment confirmation email
+                    try:
+                        send_program_payment_confirmation_email(payment)
+                        logger.info("✅ Program payment confirmation email sent successfully")
+                    except Exception as email_error:
+                        logger.error(f"❌ Failed to send program payment confirmation email: {str(email_error)}")
+                
+                return Response({
+                    'message': f'{payment_type.title()} payment completed successfully',
+                    'payment_id': str(payment.id),
+                    'order_tracking_id': order_tracking_id
+                })
+                
+            elif status_code in [2, '2']:  # FAILED
+                payment.payment_status = 'failed'
+                payment.save()
+                logger.warning(f"❌ PAYMENT FAILED - {payment_type.upper()}: {payment.id}")
+                return Response({
+                    'message': f'{payment_type.title()} payment failed',
+                    'payment_id': str(payment.id),
+                    'order_tracking_id': order_tracking_id
+                })
+                
+            elif status_code in [0, '0']:  # PENDING
+                payment.payment_status = 'pending'
+                payment.save()
+                logger.info(f"⏳ PAYMENT PENDING - {payment_type.upper()}: {payment.id}")
+                return Response({
+                    'message': f'{payment_type.title()} payment is pending',
+                    'payment_id': str(payment.id),
+                    'order_tracking_id': order_tracking_id
+                })
+            else:
+                logger.warning(f"⚠️ UNKNOWN STATUS CODE: {status_code} for {payment_type} payment: {payment.id}")
+                return Response({
+                    'message': f'{payment_type.title()} payment has unknown status',
+                    'status_code': status_code,
+                    'payment_id': str(payment.id)
+                })
+        else:
+            logger.error(f"❌ IPN validation failed for {order_tracking_id}")
+            return Response(
+                {'error': 'IPN validation failed'}, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
         
     except Exception as e:
-        logger.error(f"PesaPal IPN error: {str(e)}")
+        logger.error(f"❌ PesaPal IPN processing error: {str(e)}")
+        import traceback
+        logger.error(f"Traceback: {traceback.format_exc()}")
         return Response(
             {'error': f'IPN processing failed: {str(e)}'},
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
@@ -634,36 +726,72 @@ def send_payment_confirmation_email(payment):
     msg.attach_alternative(html_content, "text/html")
     msg.send(fail_silently=False)
     
-
+# views.py - Add these imports
+from .models import ProgramPayment
+from .serializers import ProgramPaymentSerializer
 # views.py
 @api_view(['POST'])
 def initiate_program_payment(request, registration_id):
-    """Initiate payment for program registration"""
+    """Initiate payment for program registration using ProgramPaymentService"""
     try:
+        # Get the program registration
         registration = get_object_or_404(ProgramRegistration, id=registration_id)
         
-        # Get or create payment
-        payment, created = ProgramPayment.objects.get_or_create(
-            registration=registration,
-            defaults={
-                'customer_email': registration.email,
-                'customer_phone': registration.phone_number,
-                'description': f"Program: {registration.program.title}"
-            }
+        # Check if registration already has a payment
+        if hasattr(registration, 'payment'):
+            payment = registration.payment
+            logger.info(f"✅ Using existing program payment: {payment.id}")
+        else:
+            # Create new payment
+            payment = ProgramPayment.objects.create(
+                registration=registration,
+                customer_email=registration.email,
+                customer_phone=registration.phone_number,
+                description=f"Program: {registration.program.title}",
+                payment_method='pesapal'
+            )
+            logger.info(f"✅ Created new program payment: {payment.id}")
+
+        # Use ProgramPaymentService to initiate payment (with correct callback URL)
+        program_payment_service = ProgramPaymentService()
+        order_response = program_payment_service.submit_order(payment)
+
+        if order_response and order_response.get('redirect_url'):
+            # Update payment with PesaPal details
+            payment.pesapal_order_tracking_id = order_response.get('order_tracking_id')
+            payment.pesapal_payment_url = order_response.get('redirect_url')
+            payment.payment_status = 'initiated'
+            payment.payment_initiated_at = timezone.now()
+            payment.save()
+            
+            logger.info(f"✅ Program payment initiated successfully - Payment ID: {payment.id}, Tracking ID: {payment.pesapal_order_tracking_id}")
+            
+            return Response({
+                'payment_url': order_response.get('redirect_url'),
+                'order_tracking_id': payment.pesapal_order_tracking_id,
+                'payment_id': str(payment.id),
+                'registration_id': registration.id,
+                'message': 'Payment initiated successfully'
+            })
+        else:
+            # Mark payment as failed if initiation fails
+            payment.payment_status = 'failed'
+            payment.save()
+            
+            logger.error(f"❌ Program payment initiation failed for registration: {registration.id}")
+            return Response(
+                {'error': 'Failed to initiate payment with PesaPal'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+    except ProgramRegistration.DoesNotExist:
+        logger.error(f"❌ Program registration not found: {registration_id}")
+        return Response(
+            {'error': 'Program registration not found'},
+            status=status.HTTP_404_NOT_FOUND
         )
-
-        # Initiate payment
-        payment_service = ProgramPaymentService()
-        payment_data = payment_service.initiate_payment(payment)
-
-        return Response({
-            'payment_url': payment_data['payment_url'],
-            'order_tracking_id': payment_data['order_tracking_id'],
-            'message': 'Payment initiated successfully'
-        })
-
     except Exception as e:
-        logger.error(f"Program payment initiation error: {str(e)}")
+        logger.error(f"❌ Program payment initiation error: {str(e)}")
         return Response(
             {'error': f'Payment initiation failed: {str(e)}'},
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
@@ -676,24 +804,165 @@ def program_payment_status(request, payment_id):
         payment = get_object_or_404(ProgramPayment, id=payment_id)
         
         if payment.pesapal_order_tracking_id:
-            payment_service = ProgramPaymentService()
-            status_response = payment_service.get_transaction_status(payment.pesapal_order_tracking_id)
+            # Use ProgramPaymentService for consistency
+            program_payment_service = ProgramPaymentService()
+            status_response = program_payment_service.get_transaction_status(payment.pesapal_order_tracking_id)
             
             if status_response:
+                logger.info(f"🔍 Program payment status check - Payment ID: {payment_id}, PesaPal Status: {status_response.get('status_code')}")
                 return Response({
                     'payment_status': payment.payment_status,
                     'pesapal_status': status_response,
                     'payment_details': ProgramPaymentSerializer(payment).data
                 })
         
+        logger.info(f"🔍 Program payment status - Payment ID: {payment_id}, Status: {payment.payment_status}")
         return Response({
             'payment_status': payment.payment_status,
             'payment_details': ProgramPaymentSerializer(payment).data
         })
         
+    except ProgramPayment.DoesNotExist:
+        logger.error(f"❌ Program payment not found: {payment_id}")
+        return Response(
+            {'error': 'Program payment not found'},
+            status=status.HTTP_404_NOT_FOUND
+        )
     except Exception as e:
-        logger.error(f"Program payment status error: {str(e)}")
+        logger.error(f"❌ Program payment status error: {str(e)}")
         return Response(
             {'error': f'Failed to get payment status: {str(e)}'},
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
+# Add program payment callback handler
+@api_view(['GET', 'POST'])
+def program_payment_callback(request):
+    """Handle PesaPal callback for program payments"""
+    try:
+        # Extract parameters (same logic as event payment callback)
+        if request.method == 'GET':
+            order_tracking_id = request.GET.get('OrderTrackingId')
+            order_merchant_reference = request.GET.get('OrderMerchantReference')
+        else:
+            order_tracking_id = request.GET.get('OrderTrackingId') or request.data.get('OrderTrackingId')
+            order_merchant_reference = request.GET.get('OrderMerchantReference') or request.data.get('OrderMerchantReference')
+        
+        logger.info(f"🔔 PROGRAM Payment Callback Received - OrderTrackingId: {order_tracking_id}, Method: {request.method}")
+        
+        if not order_tracking_id:
+            logger.error("❌ Program payment callback missing OrderTrackingId")
+            frontend_base_url = getattr(settings, 'FRONTEND_URL', 'http://localhost:8080')
+            frontend_url = f"{frontend_base_url}/program-payment-result?status=error&message=Missing order tracking ID"
+            return HttpResponseRedirect(frontend_url)
+        
+        # Get program payment record
+        try:
+            payment = ProgramPayment.objects.get(pesapal_order_tracking_id=order_tracking_id)
+            logger.info(f"✅ Program payment found: {payment.id} for tracking ID: {order_tracking_id}")
+            
+        except ProgramPayment.DoesNotExist:
+            logger.error(f"❌ No program payment found for tracking ID: {order_tracking_id}")
+            frontend_base_url = getattr(settings, 'FRONTEND_URL', 'http://localhost:8080')
+            frontend_url = f"{frontend_base_url}/program-payment-result?status=error&message=Payment not found"
+            return HttpResponseRedirect(frontend_url)
+        
+        # Check transaction status using ProgramPaymentService
+        program_payment_service = ProgramPaymentService()
+        status_response = program_payment_service.get_transaction_status(order_tracking_id)
+        
+        logger.info(f"📡 PesaPal status response for program payment: {status_response}")
+        
+        payment_updated = False
+        payment_status = payment.payment_status
+        
+        if status_response:
+            status_code = status_response.get('status_code')
+            payment_method = status_response.get('payment_method')
+            transaction_id = status_response.get('transaction_id')
+            
+            if status_code in [1, '1']:  # COMPLETED
+                payment.payment_status = 'completed'
+                payment.payment_completed_at = timezone.now()
+                payment.payment_method = payment_method or 'pesapal'
+                payment.pesapal_transaction_id = transaction_id
+                
+                # Update registration payment status
+                payment.registration.has_paid = True
+                payment.registration.save()
+                
+                payment_status = 'completed'
+                payment_updated = True
+                
+                logger.info(f"✅ PROGRAM PAYMENT COMPLETED! Payment ID: {payment.id}, Registration: {payment.registration.email}")
+                
+                # Send program payment confirmation email
+                try:
+                    send_program_payment_confirmation_email(payment)
+                    logger.info("✅ Program payment confirmation email sent successfully")
+                except Exception as email_error:
+                    logger.error(f"❌ Failed to send program payment confirmation email: {str(email_error)}")
+                
+            elif status_code in [2, '2']:  # Failed
+                payment.payment_status = 'failed'
+                payment_status = 'failed'
+                payment_updated = True
+                logger.warning(f"❌ Program payment failed for {payment.registration.email}")
+            
+            elif status_code in [0, '0']:  # Pending
+                payment.payment_status = 'pending'
+                payment_status = 'pending'
+                payment_updated = True
+                logger.info(f"⏳ Program payment still pending for {payment.registration.email}")
+            
+            if payment_updated:
+                payment.save()
+                logger.info(f"📝 Program payment updated - Status: {payment_status}, Payment ID: {payment.id}")
+        
+        # Redirect to frontend
+        frontend_base_url = getattr(settings, 'FRONTEND_URL', 'http://localhost:8080').rstrip('/')
+        frontend_url = f"{frontend_base_url}/program-payment-result?status={payment_status}&order_tracking_id={order_tracking_id}&payment_id={payment.id}"
+        
+        if payment_status == 'completed':
+            frontend_url += "&message=Payment completed successfully"
+        elif payment_status == 'failed':
+            frontend_url += "&message=Payment failed. Please try again."
+        elif payment_status == 'pending':
+            frontend_url += "&message=Payment is still processing"
+        
+        logger.info(f"🔀 Redirecting to program payment result: {frontend_url}")
+        return HttpResponseRedirect(frontend_url)
+        
+    except Exception as e:
+        logger.error(f"❌ Program payment callback processing failed: {str(e)}")
+        import traceback
+        logger.error(f"Traceback: {traceback.format_exc()}")
+        
+        frontend_base_url = getattr(settings, 'FRONTEND_URL', 'http://localhost:8080').rstrip('/')
+        frontend_url = f"{frontend_base_url}/program-payment-result?status=error&message=Callback processing failed"
+        return HttpResponseRedirect(frontend_url)
+
+def send_program_payment_confirmation_email(payment):
+    """Send payment confirmation email for program registration"""
+    registration = payment.registration
+    program = registration.program
+    
+    context = {
+        'name': registration.full_name,
+        'program': program.title,
+        'amount': payment.amount,
+        'currency': payment.currency,
+        'transaction_id': payment.pesapal_transaction_id,
+    }
+
+    subject = f"✅ Payment Confirmed for {program.title}"
+    html_content = render_to_string('emails/program_payment_confirmation.html', context)
+    text_content = render_to_string('emails/program_payment_confirmation.txt', context)
+
+    msg = EmailMultiAlternatives(
+        subject=subject,
+        body=text_content,
+        from_email=settings.DEFAULT_FROM_EMAIL,
+        to=[registration.email],
+    )
+    msg.attach_alternative(html_content, "text/html")
+    msg.send(fail_silently=False)

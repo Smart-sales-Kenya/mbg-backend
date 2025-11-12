@@ -284,7 +284,7 @@ class ProgramRegistrationSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'program', 'full_name', 'email', 'phone_number',
             'company_name', 'role', 'team_size', 'challenges',
-            'has_paid', 'payment_reference', 'registered_at'
+            'has_paid', 'registered_at'
         ]
 
 
@@ -319,3 +319,41 @@ class PaymentSerializer(serializers.ModelSerializer):
 
     def get_event_title(self, obj):
         return obj.registration.event.title
+    
+    
+    
+#program registration serializer
+# serializers.py - Add this
+from .models import ProgramPayment
+
+class ProgramPaymentSerializer(serializers.ModelSerializer):
+    registration_details = serializers.SerializerMethodField()
+    program_title = serializers.SerializerMethodField()
+
+    class Meta:
+        model = ProgramPayment
+        fields = [
+            'id',
+            'amount',
+            'currency',
+            'payment_method',
+            'payment_status',
+            'registration_details',
+            'program_title',
+            'pesapal_order_tracking_id',
+            'pesapal_payment_url',
+            'payment_initiated_at',
+            'payment_completed_at',
+            'created_at',
+        ]
+        read_only_fields = ['id', 'created_at']
+
+    def get_registration_details(self, obj):
+        return {
+            'full_name': obj.registration.full_name,
+            'email': obj.registration.email,
+            'phone': obj.registration.phone_number
+        }
+
+    def get_program_title(self, obj):
+        return obj.registration.program.title

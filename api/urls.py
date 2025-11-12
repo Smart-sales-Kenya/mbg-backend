@@ -37,15 +37,17 @@ urlpatterns = [
     path('program/<str:program_id>/register/', views.program_register_endpoint, name='program-register'),
     path('program/list/', views.program_list_endpoint, name='program-list'),
     
-    # Program Payment URLs
-    path('program-payments/initiate/<str:registration_id>/', views.initiate_program_payment, name='initiate-program-payment'),
-# urls.py
-    path('program-payments/status/<uuid:payment_id>/', views.program_payment_status, name='program-payment-status'),
-
-     # Payment URLs
+   
+     #events Payment URLs
     path('payments/initiate/<int:registration_id>/', views.initiate_payment, name='initiate-payment'),
     path('payments/status/<uuid:payment_id>/', views.payment_status, name='payment-status'),
     path('payments/pesapal-callback/', views.pesapal_callback, name='pesapal-callback'),
     path('payments/pesapal-ipn/', views.pesapal_ipn, name='pesapal-ipn'),
+    
+    #programs
+    path('program-payments/initiate/<int:registration_id>/', views.initiate_program_payment, name='initiate-program-payment'),
+    path('program-payments/status/<uuid:payment_id>/', views.program_payment_status, name='program-payment-status'),
+    path('program-payments/pesapal-callback/', views.program_payment_callback, name='program-payment-callback'),
+
     
 ]

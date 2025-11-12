@@ -4164,3 +4164,447 @@ Not Found: /api/payments/pesapal-callback/os.getenv('FRONTEND_URL', 'http://loca
 Watching for file changes with StatReloader
 C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
 Watching for file changes with StatReloader
+"GET /admin/api/payment/7b08a546-cb1b-41c5-9f43-02a8e8255bab/change/ HTTP/1.1" 200 43532
+OrderTrackingId: 4443ec71-67cb-4278-8781-db196bbd8793
+OrderMerchantReference: 66a73fc2-fcd1-4693-8d47-a437b1e4b0fe
+Current payment status: completed
+Current registration status: confirmed
+Requesting Pesapal access token.
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Auth/RequestToken HTTP/1.1" 200 564
+Pesapal token response status=200
+Obtained Pesapal access token (cached ttl=300)
+https://cybqa.pesapal.com:443 "GET /pesapalv3/api/Transactions/GetTransactionStatus?orderTrackingId=4443ec71-67cb-4278-8781-db196bbd8793 HTTP/1.1" 200 704
+  - Status Code: 1 (type: <class 'int'>)
+  - Payment Method: MpesaKE
+  - Transaction ID: None
+  - Status Description: Completed
+"GET /api/payments/pesapal-callback/?OrderTrackingId=4443ec71-67cb-4278-8781-db196bbd8793&OrderMerchantReference=66a73fc2-fcd1-4693-8d47-a437b1e4b0fe HTTP/1.1" 302 0
+"GET //api/testimonials/ HTTP/1.1" 200 2
+"GET //api/program/list/ HTTP/1.1" 200 235
+"OPTIONS //api/program/BVROW0/register/ HTTP/1.1" 200 0
+Program registration error: Field name `payment_reference` is not valid for model `ProgramRegistration` in `api.serializers.ProgramRegistrationSerializer`.
+Internal Server Error: /api/program/BVROW0/register/
+"POST //api/program/BVROW0/register/ HTTP/1.1" 500 160
+Program registration error: Field name `payment_reference` is not valid for model `ProgramRegistration` in `api.serializers.ProgramRegistrationSerializer`.
+Internal Server Error: /api/program/BVROW0/register/
+"POST //api/program/BVROW0/register/ HTTP/1.1" 500 160
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\serializers.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\serializers.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\serializers.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\serializers.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Program registration error: Field name `payment_reference` is not valid for model `ProgramRegistration` in `api.serializers.ProgramRegistrationSerializer`.
+Internal Server Error: /api/program/BVROW0/register/
+"POST //api/program/BVROW0/register/ HTTP/1.1" 500 160
+Program registration error: Field name `payment_reference` is not valid for model `ProgramRegistration` in `api.serializers.ProgramRegistrationSerializer`.
+Internal Server Error: /api/program/BVROW0/register/
+"POST //api/program/BVROW0/register/ HTTP/1.1" 500 160
+Program registration error: Field name `payment_reference` is not valid for model `ProgramRegistration` in `api.serializers.ProgramRegistrationSerializer`.
+Internal Server Error: /api/program/BVROW0/register/
+"POST //api/program/BVROW0/register/ HTTP/1.1" 500 160
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\serializers.py changed, reloading.
+Watching for file changes with StatReloader
+"POST //api/program/BVROW0/register/ HTTP/1.1" 201 99
+"OPTIONS //api/program-payments/initiate/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 0
+Program payment initiation error: Field 'id' expected a number but got '0ba8a1bd-d1ba-42ae-991f-690e40d63e2d'.
+Internal Server Error: /api/program-payments/initiate/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/
+"POST //api/program-payments/initiate/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 500 115
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+Program payment initiation error: Field 'id' expected a number but got '0ba8a1bd-d1ba-42ae-991f-690e40d63e2d'.
+Internal Server Error: /api/program-payments/initiate/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/
+"POST //api/program-payments/initiate/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 500 115
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+Program payment initiation error: Field 'id' expected a number but got '0ba8a1bd-d1ba-42ae-991f-690e40d63e2d'.
+Internal Server Error: /api/program-payments/initiate/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/
+"POST //api/program-payments/initiate/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 500 115
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+Program payment initiation error: Field 'id' expected a number but got '0ba8a1bd-d1ba-42ae-991f-690e40d63e2d'.
+Internal Server Error: /api/program-payments/initiate/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/
+"POST //api/program-payments/initiate/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 500 115
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+Not Found: /api/program-payments/initiate/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/
+"POST //api/program-payments/initiate/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 404 10286
+Not Found: /api/program-payments/initiate/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/
+"POST //api/program-payments/initiate/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 404 10286
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+Not Found: /api/program-payments/initiate/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/
+"POST //api/program-payments/initiate/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 404 10286
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\urls.py changed, reloading.
+Watching for file changes with StatReloader
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+Not Found: /api/program-payments/initiate/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/
+"POST //api/program-payments/initiate/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 404 10286
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+Not Found: /api/program-payments/initiate/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/
+"POST //api/program-payments/initiate/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 404 10286
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET /admin/ HTTP/1.1" 200 50400
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET /admin/api/programregistration/ HTTP/1.1" 200 30981
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 200 471
+"POST /admin/api/programregistration/ HTTP/1.1" 200 23905
+"POST /admin/api/programregistration/ HTTP/1.1" 302 0
+"GET /admin/api/programregistration/ HTTP/1.1" 200 25683
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+Program payment status error: No ProgramPayment matches the given query.
+Internal Server Error: /api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 500 84
+"GET /admin/ HTTP/1.1" 200 50391
+"GET /admin/api/programpayment/ HTTP/1.1" 200 26891
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+Program payment status error: No ProgramPayment matches the given query.
+Internal Server Error: /api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/
+"GET //api/program-payments/status/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 500 84
+Not Found: /api/program-payments/initiate/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/
+"POST //api/program-payments/initiate/0ba8a1bd-d1ba-42ae-991f-690e40d63e2d/ HTTP/1.1" 404 10286
+"GET //api/program/list/ HTTP/1.1" 200 235
+"GET //api/program/list/ HTTP/1.1" 200 235
+"OPTIONS //api/program-payments/initiate/12/ HTTP/1.1" 200 0
+Program payment initiation error: No ProgramRegistration matches the given query.
+Internal Server Error: /api/program-payments/initiate/12/
+"POST //api/program-payments/initiate/12/ HTTP/1.1" 500 86
+Program payment initiation error: No ProgramRegistration matches the given query.
+Internal Server Error: /api/program-payments/initiate/12/
+"POST //api/program-payments/initiate/12/ HTTP/1.1" 500 86
+"GET /admin/api/programpayment/ HTTP/1.1" 200 26891
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/programregistration/ HTTP/1.1" 200 25170
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/programregistration/ HTTP/1.1" 200 25170
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET //api/program/list/ HTTP/1.1" 200 235
+Program payment initiation error: No ProgramRegistration matches the given query.
+Internal Server Error: /api/program-payments/initiate/12/
+"POST //api/program-payments/initiate/12/ HTTP/1.1" 500 86
+Program payment initiation error: No ProgramRegistration matches the given query.
+Internal Server Error: /api/program-payments/initiate/12/
+"POST //api/program-payments/initiate/12/ HTTP/1.1" 500 86
+Program payment initiation error: No ProgramRegistration matches the given query.
+Internal Server Error: /api/program-payments/initiate/12/
+"POST //api/program-payments/initiate/12/ HTTP/1.1" 500 86
+Program payment initiation error: No ProgramRegistration matches the given query.
+Internal Server Error: /api/program-payments/initiate/12/
+"POST //api/program-payments/initiate/12/ HTTP/1.1" 500 86
+Program payment initiation error: No ProgramRegistration matches the given query.
+Internal Server Error: /api/program-payments/initiate/12/
+"POST //api/program-payments/initiate/12/ HTTP/1.1" 500 86
+Program payment initiation error: No ProgramRegistration matches the given query.
+Internal Server Error: /api/program-payments/initiate/12/
+"POST //api/program-payments/initiate/12/ HTTP/1.1" 500 86
+Program payment initiation error: No ProgramRegistration matches the given query.
+Internal Server Error: /api/program-payments/initiate/12/
+"POST //api/program-payments/initiate/12/ HTTP/1.1" 500 86
+Program payment initiation error: No ProgramRegistration matches the given query.
+Internal Server Error: /api/program-payments/initiate/12/
+"POST //api/program-payments/initiate/12/ HTTP/1.1" 500 86
+Program payment initiation error: No ProgramRegistration matches the given query.
+Internal Server Error: /api/program-payments/initiate/12/
+"POST //api/program-payments/initiate/12/ HTTP/1.1" 500 86
+Program payment initiation error: No ProgramRegistration matches the given query.
+Internal Server Error: /api/program-payments/initiate/12/
+"POST //api/program-payments/initiate/12/ HTTP/1.1" 500 86
+Program payment initiation error: No ProgramRegistration matches the given query.
+Internal Server Error: /api/program-payments/initiate/12/
+"POST //api/program-payments/initiate/12/ HTTP/1.1" 500 86
+Program payment initiation error: No ProgramRegistration matches the given query.
+Internal Server Error: /api/program-payments/initiate/12/
+"POST //api/program-payments/initiate/12/ HTTP/1.1" 500 86
+Program payment initiation error: No ProgramRegistration matches the given query.
+Internal Server Error: /api/program-payments/initiate/12/
+"POST //api/program-payments/initiate/12/ HTTP/1.1" 500 86
+Program payment initiation error: No ProgramRegistration matches the given query.
+Internal Server Error: /api/program-payments/initiate/12/
+"POST //api/program-payments/initiate/12/ HTTP/1.1" 500 86
+Program payment initiation error: No ProgramRegistration matches the given query.
+Internal Server Error: /api/program-payments/initiate/12/
+"POST //api/program-payments/initiate/12/ HTTP/1.1" 500 86
+Program payment initiation error: No ProgramRegistration matches the given query.
+Internal Server Error: /api/program-payments/initiate/12/
+"POST //api/program-payments/initiate/12/ HTTP/1.1" 500 86
+Program payment initiation error: No ProgramRegistration matches the given query.
+Internal Server Error: /api/program-payments/initiate/12/
+"POST //api/program-payments/initiate/12/ HTTP/1.1" 500 86
+Program payment initiation error: No ProgramRegistration matches the given query.
+Internal Server Error: /api/program-payments/initiate/12/
+"POST //api/program-payments/initiate/12/ HTTP/1.1" 500 86
+Program payment initiation error: No ProgramRegistration matches the given query.
+Internal Server Error: /api/program-payments/initiate/12/
+"POST //api/program-payments/initiate/12/ HTTP/1.1" 500 86
+Program payment initiation error: No ProgramRegistration matches the given query.
+Internal Server Error: /api/program-payments/initiate/12/
+"POST //api/program-payments/initiate/12/ HTTP/1.1" 500 86
+Program payment initiation error: No ProgramRegistration matches the given query.
+Internal Server Error: /api/program-payments/initiate/12/
+"POST //api/program-payments/initiate/12/ HTTP/1.1" 500 86
+"GET //api/program/list/ HTTP/1.1" 200 235
+Watching for file changes with StatReloader
+"GET //api/program/list/ HTTP/1.1" 200 235
+"GET //api/program/list/ HTTP/1.1" 200 235
+"OPTIONS //api/program/BVROW0/register/ HTTP/1.1" 200 0
+"POST //api/program/BVROW0/register/ HTTP/1.1" 201 194
+"OPTIONS //api/program-payments/initiate/13/ HTTP/1.1" 200 0
+Submitting order to Pesapal for payment id=40ac6397-e3cc-42bb-a8dd-70a08fd99778
+Requesting Pesapal access token.
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Auth/RequestToken HTTP/1.1" 200 564
+Pesapal token response status=200
+Obtained Pesapal access token (cached ttl=300)
+Registering IPN with Pesapal (not logging the ipn url).
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/URLSetup/RegisterIPN HTTP/1.1" 200 316
+Pesapal IPN register status=200
+Pesapal IPN registered and cached (ipn_id present).
+Sending SubmitOrderRequest to Pesapal (not logging full payload).
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Transactions/SubmitOrderRequest HTTP/1.1" 200 279
+Pesapal order submission status=200
+Payment updated: tracking_id=aaa0b717-e563-42b3-ad98-db198c089005 merchant_reference=56999a02-e55f-46ec-a9dc-99ed5eeb5862
+Payment successfully initiated; merchant_reference=56999a02-e55f-46ec-a9dc-99ed5eeb5862
+"POST //api/program-payments/initiate/13/ HTTP/1.1" 200 306
+OrderTrackingId: aaa0b717-e563-42b3-ad98-db198c089005
+OrderMerchantReference: 56999a02-e55f-46ec-a9dc-99ed5eeb5862
+"GET /api/payments/pesapal-callback/?OrderTrackingId=aaa0b717-e563-42b3-ad98-db198c089005&OrderMerchantReference=56999a02-e55f-46ec-a9dc-99ed5eeb5862 HTTP/1.1" 302 0
+"GET /admin/api/programregistration/ HTTP/1.1" 200 30272
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/programpayment/ HTTP/1.1" 200 34814
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/programpayment/40ac6397-e3cc-42bb-a8dd-70a08fd99778/change/ HTTP/1.1" 200 42306
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+OrderTrackingId: aaa0b717-e563-42b3-ad98-db198c089005
+OrderMerchantReference: 56999a02-e55f-46ec-a9dc-99ed5eeb5862
+"GET /api/payments/pesapal-callback/?OrderTrackingId=aaa0b717-e563-42b3-ad98-db198c089005&OrderMerchantReference=56999a02-e55f-46ec-a9dc-99ed5eeb5862 HTTP/1.1" 302 0
+"GET /api/get-csrf-token/ HTTP/1.1" 200 30
+"GET /api/events/ HTTP/1.1" 200 1981
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+Forbidden (CSRF cookie not set.): /api/program-payments/initiate/12/
+"POST //api/program-payments/initiate/12/ HTTP/1.1" 403 2855
+"GET //api/program/list/ HTTP/1.1" 200 235
+"POST //api/program/BVROW0/register/ HTTP/1.1" 201 194
+"OPTIONS //api/program-payments/initiate/14/ HTTP/1.1" 200 0
+Forbidden (CSRF cookie not set.): /api/program-payments/initiate/14/
+"POST //api/program-payments/initiate/14/ HTTP/1.1" 403 2855
+Forbidden (CSRF cookie not set.): /api/program-payments/initiate/14/
+"POST //api/program-payments/initiate/14/ HTTP/1.1" 403 2855
+Forbidden (CSRF cookie not set.): /api/program-payments/initiate/14/
+"POST //api/program-payments/initiate/14/ HTTP/1.1" 403 2855
+Forbidden (CSRF cookie not set.): /api/program-payments/initiate/14/
+"POST //api/program-payments/initiate/14/ HTTP/1.1" 403 2855
+Forbidden (CSRF cookie not set.): /api/program-payments/initiate/14/
+"POST //api/program-payments/initiate/14/ HTTP/1.1" 403 2855
+Forbidden (CSRF cookie not set.): /api/program-payments/initiate/14/
+"POST //api/program-payments/initiate/14/ HTTP/1.1" 403 2855
+"GET /admin/ HTTP/1.1" 200 50411
+"GET /admin/api/programregistration/ HTTP/1.1" 200 30974
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/api/programpayment/ HTTP/1.1" 200 34814
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/program/list/ HTTP/1.1" 200 235
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/testimonials/ HTTP/1.1" 200 2
+"GET //api/program/list/ HTTP/1.1" 200 235
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"OPTIONS //api/program/BVROW0/register/ HTTP/1.1" 200 0
+"POST //api/program/BVROW0/register/ HTTP/1.1" 201 194
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
+Forbidden (CSRF cookie not set.): /api/program-payments/initiate/14/
+"POST //api/program-payments/initiate/14/ HTTP/1.1" 403 2855
+Forbidden (CSRF cookie not set.): /api/program-payments/initiate/14/
+"POST //api/program-payments/initiate/14/ HTTP/1.1" 403 2855
+Forbidden (CSRF cookie not set.): /api/program-payments/initiate/14/
+"POST //api/program-payments/initiate/14/ HTTP/1.1" 403 2855
+Forbidden (CSRF cookie not set.): /api/program-payments/initiate/14/
+"POST //api/program-payments/initiate/14/ HTTP/1.1" 403 2855
+Forbidden (CSRF cookie not set.): /api/program-payments/initiate/14/
+"POST //api/program-payments/initiate/14/ HTTP/1.1" 403 2855
+"OPTIONS //api/program-payments/initiate/15/ HTTP/1.1" 200 0
+Forbidden (CSRF cookie not set.): /api/program-payments/initiate/15/
+"POST //api/program-payments/initiate/15/ HTTP/1.1" 403 2855
+"GET //api/program/list/ HTTP/1.1" 200 235
+Forbidden (CSRF cookie not set.): /api/program-payments/initiate/15/
+"POST //api/program-payments/initiate/15/ HTTP/1.1" 403 2855
+Forbidden (CSRF cookie not set.): /api/program-payments/initiate/15/
+"POST //api/program-payments/initiate/15/ HTTP/1.1" 403 2855
+Forbidden (CSRF cookie not set.): /api/program-payments/initiate/15/
+"POST //api/program-payments/initiate/15/ HTTP/1.1" 403 2855
+Forbidden (CSRF cookie not set.): /api/program-payments/initiate/15/
+"POST //api/program-payments/initiate/15/ HTTP/1.1" 403 2855
+Forbidden (CSRF cookie not set.): /api/program-payments/initiate/15/
+"POST //api/program-payments/initiate/15/ HTTP/1.1" 403 2855
+Forbidden (CSRF cookie not set.): /api/program-payments/initiate/15/
+"POST //api/program-payments/initiate/15/ HTTP/1.1" 403 2855
+Forbidden (CSRF cookie not set.): /api/program-payments/initiate/15/
+"POST //api/program-payments/initiate/15/ HTTP/1.1" 403 2855
+Forbidden (CSRF cookie not set.): /api/program-payments/initiate/15/
+"POST //api/program-payments/initiate/15/ HTTP/1.1" 403 2855
+Forbidden (CSRF cookie not set.): /api/program-payments/initiate/15/
+"POST //api/program-payments/initiate/15/ HTTP/1.1" 403 2855
+Forbidden (CSRF cookie not set.): /api/program-payments/initiate/15/
+"POST //api/program-payments/initiate/15/ HTTP/1.1" 403 2855
+Forbidden (CSRF cookie not set.): /api/program-payments/initiate/15/
+"POST //api/program-payments/initiate/15/ HTTP/1.1" 403 2855
+Forbidden (CSRF cookie not set.): /api/program-payments/initiate/15/
+"POST //api/program-payments/initiate/15/ HTTP/1.1" 403 2855
+Forbidden (CSRF cookie not set.): /api/program-payments/initiate/15/
+"POST //api/program-payments/initiate/15/ HTTP/1.1" 403 2855
+Forbidden (CSRF cookie not set.): /api/program-payments/initiate/15/
+"POST //api/program-payments/initiate/15/ HTTP/1.1" 403 2855
+Forbidden (CSRF cookie not set.): /api/program-payments/initiate/15/
+"POST //api/program-payments/initiate/15/ HTTP/1.1" 403 2855
+Forbidden (CSRF cookie not set.): /api/program-payments/initiate/15/
+"POST //api/program-payments/initiate/15/ HTTP/1.1" 403 2855
+Forbidden (CSRF cookie not set.): /api/program-payments/initiate/15/
+"POST //api/program-payments/initiate/15/ HTTP/1.1" 403 2855
+Forbidden (CSRF cookie not set.): /api/program-payments/initiate/15/
+"POST //api/program-payments/initiate/15/ HTTP/1.1" 403 2855
+Forbidden (CSRF cookie not set.): /api/program-payments/initiate/15/
+"POST //api/program-payments/initiate/15/ HTTP/1.1" 403 2855
+Forbidden (CSRF token missing.): /api/program-payments/initiate/15/
+"POST /api/program-payments/initiate/15/ HTTP/1.1" 403 2491
+Forbidden (CSRF token missing.): /api/program-payments/initiate/15/
+"POST /api/program-payments/initiate/15/ HTTP/1.1" 403 2491
+"GET /api/get-csrf-token/ HTTP/1.1" 200 30
+"GET /api/events/ HTTP/1.1" 200 1981
+"GET /api/get-csrf-token/ HTTP/1.1" 200 30
+"GET /api/events/PUVNE6/ HTTP/1.1" 200 1979
+"OPTIONS //api/events/PUVNE6/registrations/ HTTP/1.1" 200 0
+Failed to create payment record: UNIQUE constraint failed: api_payment.registration_id
+"POST //api/events/PUVNE6/registrations/ HTTP/1.1" 201 425
+"OPTIONS //api/payments/initiate/22/ HTTP/1.1" 200 0
+Submitting order to Pesapal for payment id=ec40a2af-5da9-43b2-90bf-618d799ca3a1
+Requesting Pesapal access token.
+Starting new HTTPS connection (1): cybqa.pesapal.com:443
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Auth/RequestToken HTTP/1.1" 200 564
+Pesapal token response status=200
+Obtained Pesapal access token (cached ttl=300)
+Registering IPN with Pesapal (not logging the ipn url).
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/URLSetup/RegisterIPN HTTP/1.1" 200 316
+Pesapal IPN register status=200
+Pesapal IPN registered and cached (ipn_id present).
+Sending SubmitOrderRequest to Pesapal (not logging full payload).
+https://cybqa.pesapal.com:443 "POST /pesapalv3/api/Transactions/SubmitOrderRequest HTTP/1.1" 200 279
+Pesapal order submission status=200
+Payment updated: tracking_id=903e0387-70d6-40f6-a678-db194dd4288d merchant_reference=c2d550a1-24d6-4be5-9c7b-ff1c9b1427b1
+Payment successfully initiated; merchant_reference=c2d550a1-24d6-4be5-9c7b-ff1c9b1427b1
+"POST //api/payments/initiate/22/ HTTP/1.1" 200 285
+C:\Users\User\Desktop\DarajaCloudSpace\backend\api\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET //api/get-csrf-token/ HTTP/1.1" 200 30
